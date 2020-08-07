@@ -1,0 +1,136 @@
+@import '../commonstyles.scss';
+.login-form-container{
+    height: auto;
+    background-color: white;
+    box-shadow:  -1px 3px 25px gray;
+    position: absolute;
+    width: 350px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .login-submit {
+    width: 100%;
+    margin: 25px 0 -10px;
+    padding: 0.65rem 2.13rem;   
+    background-color: $primary-color;
+    color: #FFF;
+  }
+  a.forgotPass {
+    font-size: 15px;
+}
+  .login-header {
+    height: 50px;    
+    padding: 10px;
+    color: #444444;
+    font-family: sans-serif;
+    font-size: x-large;    
+  }
+  .container-body {
+    padding: 20px;
+    padding-top: 0;
+  }
+  .error-message{
+    text-align: center;
+    color: rgb(245, 72, 72);
+  }  
+  .login-pwd .mat-form-field{
+    width: 100%;
+  } 
+  // .login-header strong {
+  //   font-weight: bolder;
+  //   color: #444;
+  // }
+  .download{
+    position: fixed;
+    float: right;
+    bottom: 50px;
+    right: 27px;
+    height: 30px;
+    width: 115px;
+    background-color: #007baa;
+    z-index: 999;
+    top: 135px;
+  }
+  .download p{
+    position: absolute;
+    font-size: 1rem;
+    right: 0px;
+    color: #fff;
+    top: 0px;
+    width: 117px;
+    height: 30px;
+    background-color: #1CABE2;
+    padding: 5px;
+    left: 25px;
+  }
+  .fa-download{
+    font-size: 16px;
+    color: #fff;
+    margin-top: 6px;
+    margin-right: 6px;
+    padding-right: 2px;
+    padding-top: 2px;
+  }
+  .download a{
+    text-decoration: none;
+    padding-left: 5px;
+    padding-top: 2px;
+  }
+  /** media query starts here **/
+  @media(max-width:1024px){
+    .download{
+        position: fixed;
+        float: right;
+        bottom: 50px;
+        right: 0px;
+        height: 25px;
+        width: 30px;
+        background-color: #007baa;
+      }
+      .fa-download{
+        font-size: 17px;
+        color: #fff;
+        margin-right: 6px;
+        padding-right: 0px;
+        margin-left: 5px;
+        margin-top: 4px;
+      }
+      .download p{
+      display: none;
+      }
+      .download a{
+        font-size: 0px !important;
+        color: #fff;
+        margin-bottom: 0px;
+        font-size: 10px;
+        margin-left: 1px;
+        margin-top: 6px;
+        padding-left: 2px;
+      }
+  }
+    .login-submit {
+      margin: 0;
+    }
+  @media (max-width: 991px){
+    .login-form-container{
+      position: relative;
+      margin-top: 238px;
+    }
+  }
+  @media (max-width: 608px){
+    label {
+      margin-bottom: 0;
+    }
+    .login-submit {
+      margin: 0;
+    }
+  }
+  @media (max-width: 360px){
+    .login-form-container{
+      margin-top: 245px;
+      bottom: 0px;
+      top: 0px;
+      margin-bottom: 0px;
+    }
+  }

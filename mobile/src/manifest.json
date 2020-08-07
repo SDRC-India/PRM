@@ -1,0 +1,9 @@
+{
+  "name": "UPPRM",
+  "short_name": "UPPRM",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [],
+  "background_color": "#4e8ef7",
+  "theme_color": "#4e8ef7"
+}

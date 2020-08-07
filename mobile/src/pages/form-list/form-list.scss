@@ -1,0 +1,248 @@
+page-form-list {
+  ion-card img {
+    display: block;
+    width: auto;
+    margin-bottom: 5px;
+}
+  .card-outside{
+    margin-top: 0px;
+    background: color($colors, llight, base);
+    cursor: pointer;
+  }
+  .card-inside{
+      // padding: 7px;
+      font-size: 20px;
+  }
+  .form-group{
+    margin-bottom: 15px;
+  }
+  .spinner-container {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+  .form-title{
+    margin-top: 9px;
+  }
+  .add_new{
+    background: color($colors, primary, base) !important;
+  }
+  // span{
+  //   color: color($colors, light, base) !important;
+  // }
+
+
+  .card-content-head{
+    background: color($colors, primary, base);
+    padding: 6px 16px;
+  }
+  .card-content-title
+  {
+    color: color($colors, light, base);
+    font-size:1.6rem;
+  }
+
+
+
+  .card-content:not(.card-content-head)
+  {
+    padding: 0px !important;
+  }
+
+  ion-row.head
+  {
+    font-size: 1.6rem;
+    background-color: #286bff;
+    color: white;
+    border-top:  thin solid black;
+  }
+
+  .searchbar-input-container
+  {
+    border:thin solid;
+  }
+
+  .details {
+    //  color:#666 !important;
+    background-color: transparent;
+}
+.detailsRed {
+  // color:rgb(255, 3, 3) !important;
+  background-color: transparent;
+}
+
+.rowColor {
+  background-color: rgb(245, 245, 245);
+  color: black;
+  font-weight: 600;
+  // margin: 20px;
+  // width: 90%;
+
+}
+
+.card-md {
+  margin: 16px;
+  border-radius: 2px;
+  width: calc(100% - 31px);
+  font-size: 1.4rem;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.alignMiddle{
+  display: flex!important;
+  align-content: center!important;
+  align-items: center!important;
+  // background: #A82315;
+}
+
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+  background: white;
+  // color: white;
+  .saved {
+    color: #495769;
+  }
+
+  .finalized {
+    color: color($colors, finalize, base);
+   }
+
+  .sent {
+    color: color($colors, sent, base);
+   }
+
+  .reject {
+    color: #495769;
+
+  }
+
+}
+.count {
+  // margin-top: 7px;
+  font-size: 20px;
+  margin-left: 5px;
+  color: #495769 !important;
+}
+
+.saved {
+  color: color($colors, save, base);
+}
+
+.finalized {
+  color: color($colors, finalize, base);
+}
+
+.sent {
+  color: color($colors, sent, base);
+
+}
+
+.reject {
+    color: color($colors, reject, base);
+
+  }
+
+.rowColor {
+  background-color: rgb(245, 245, 245);
+  color: black;
+  font-weight: 600;
+  // margin: 20px;
+  // width: 90%;
+
+}
+
+.rowTopBlue {
+  border-top: 3px color($colors, primary, base) solid;
+  background-color: rgb(245, 245, 245);
+  color: black;
+  font-weight: 600;
+}
+
+.rowTopRed {
+  border-top: 3px #ff0000 solid;
+  background-color: rgb(245, 245, 245);
+  color: black;
+  font-weight: 600;
+}
+
+.searchbar-input-container {
+  border: 1px white solid ;
+  // box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 10px grey;
+}
+.searchbar-md {
+  background: #d3d3d30d;
+  padding: 8px;
+}
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+  #notification-button {
+    color: white;
+  }
+}
+// #notification-button {
+//   color: #3f51b5;
+//   position: relative;
+//   width: 42px;
+//   right: 2px;
+//   overflow: visible!important;
+// }
+
+
+#notification-button {
+  position: relative;
+  // width: 42px;
+  // height: 42px;
+  overflow: visible!important;
+}
+
+
+#notifications-badge {
+  background-color: red;
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  border-radius: 100%;
+}
+
+button {
+	ion-badge {
+		position: absolute;
+		top: -0.2rem;
+		right: -0.2rem;
+		opacity: 0.9;
+
+		& ~ ion-icon {
+			margin-right: 1.2rem;
+		}
+	}
+}
+
+#cart-btn {
+  position: relative;
+}
+
+#cart-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+// a, a div, a span, a ion-icon, a ion-label, button, button div, button span, button ion-icon, button ion-label, [tappable], [tappable] div, [tappable] span, [tappable] ion-icon, [tappable] ion-label, input, textarea {
+//   -ms-touch-action: manipulation;
+//   touch-action: manipulation;
+//   color: white;
+// }
+
+}
+.segment-button {
+  outline: 1px #3b4654 solid;
+  line-height:3rem !important;
+}
+.item-md p {
+  color: #080808;
+  padding: 10px !important;
+  margin-bottom: 10px !important;
+  border-radius: 4px;
+  border: 0px solid #00000078 !important;
+  background-color: #00000078 !important;
+}

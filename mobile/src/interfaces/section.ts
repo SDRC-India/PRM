@@ -1,0 +1,6 @@
+interface Section {
+
+  subsections: Subsection[]
+
+
+}

@@ -1,0 +1,175 @@
+<div class="container-fluid">
+  <div class="row question-row">
+      <div class="mob-left-list" (click)="showLists();">Menu</div>
+      <div class="col-md-3 left-list">
+          <app-user-side-menu></app-user-side-menu>
+      </div>
+      <!-- <div class="right-content"> -->
+      <div class="col-md-9 content-sec offset-md-3">
+          <div class="col-md-10 offset-md-1">
+              <h2 class="user-heading">Update User Details</h2>
+              <form class="all-fields row" #f="ngForm" (submit)="f.valid ?updateUserDetails(userManagementService.editUserDetails.roleId):''">
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <input matInput name="username" placeholder="Username" [pattern]='usernameRegex' disabled [(ngModel)]="userManagementService.editUserDetails.userName" required maxlength="30">
+                    <mat-error class="padding-bottom ">
+    
+                      {{f.controls['username']?.errors?.pattern ? 'Username accepts only alphabets and numbers':'Please provide username'}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <input matInput name="firstName" placeholder="First Name" [(ngModel)]="userManagementService.editUserDetails.firstName" [pattern]='nameRegex' required>
+                    <mat-error class="padding-bottom ">
+                      <!-- {{sdrcForm.controls['name']?.errors?.required ? 'Please provide full name': ''}} -->
+                      {{f.controls['firstName']?.errors?.pattern ? 'First name accepts only alphabet and white space(max-length: 50)':'Please provide
+                      first name'}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <input matInput name="middleName" placeholder="Middle Name" [(ngModel)]="userManagementService.editUserDetails.middleName" [pattern]='nameRegex'>
+                    <mat-error class="padding-bottom ">
+                      <!-- {{sdrcForm.controls['name']?.errors?.required ? 'Please provide full name': ''}} -->
+                      {{f.controls['middleName']?.errors?.pattern ? 'Middle name accepts only alphabet and white space':'Please provide middle
+                      name'}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <input matInput name="lastName" placeholder="Last Name" [pattern]='nameRegex' [(ngModel)]="userManagementService.editUserDetails.lastName" required>
+                    <mat-error class="padding-bottom ">
+                      <!-- {{sdrcForm.controls['name']?.errors?.required ? 'Please provide full name': ''}} -->
+                      {{f.controls['lastName']?.errors?.pattern ? 'Last name accepts only alphabet and white space':'Please provide last name'}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <label for="usr" class="gender">Gender
+                    <span class="asterisk">*</span>
+                  </label>
+                  <div class="form-group radio-section">
+                    <mat-radio-group class="radio-section-gender" name="gender" [(ngModel)]="userManagementService.editUserDetails.gender" required>
+                      <mat-radio-button *ngFor="let g of genderData; let i = index" [value]="g.value">{{g.label}}</mat-radio-button>
+                    </mat-radio-group>
+    
+                  </div>
+                  <mat-error class="padding-bottom ">
+    
+                    {{f.controls['gender']?.errors?.required && f.controls['gender']?.touched ? 'Please select gender':''}}
+                  </mat-error>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <input matInput [(ngModel)]="dob" [max]='todayDate' [matDatepicker]="picker" name="dob" placeholder="Date of birth" readonly
+                      required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker  startView="multi-year"></mat-datepicker>
+                    <mat-error class="padding-bottom ">
+    
+                      {{f.controls['dob']?.errors?.pattern ? 'Provided date of birth not valid':'Please provide your Date of birth'}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <input matInput class="nospinner" placeholder="Mobile No." type="text" pattern="\d*" maxlength="10" minlength="10" name="mobile"
+                      [(ngModel)]="userManagementService.editUserDetails.mobileNumber" required>
+                    <mat-error class="padding-bottom ">
+                      {{f.controls['mobile']?.errors?.pattern ? 'Mobile no should be 10 digit':'Please provide mobile number'}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <input matInput class="nospinner" name="email" placeholder="Email" type="text" [pattern]="emailRegex" [(ngModel)]="userManagementService.editUserDetails.email"
+                      required>
+                    <mat-error class="padding-bottom ">
+    
+                      {{f.controls['email']?.errors?.pattern ? 'Email not valid':'Please provide email address'}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="selection-fields col-md-6">
+                  <mat-form-field class="user-mangt">
+                    <mat-select [(ngModel)]="userManagementService.editUserDetails.degSlugId" placeholder="User Role" name="role" required>
+                      <mat-option *ngFor="let opt of userManagementService.userRoles" [value]="opt.slugId">
+                        {{opt.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error class="padding-bottom ">
+                      Please provide user role
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+    
+    
+                <div class="selection-fields col-md-6" *ngIf="userManagementService.editUserDetails.degSlugId == 3 || userManagementService.editUserDetails.degSlugId == 4">
+                    <mat-form-field class="user-mangt">
+                      <mat-select name="areaId" placeholder="District" [(ngModel)]="selectedAreaId"
+                        required>
+                        <mat-option *ngFor="let area of userManagementService.areaList | sortBy : 'areaName'" [value]="area.areaId">
+                          {{area.areaName}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error class="padding-bottom ">
+                        Please select one district
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+    
+                
+    
+                <div class="form-group mt-btn text-center col-md-12">
+                  <button class="btn btn-default proceed-btn button-fn user-submit" type="submit">Update</button>
+                  <!-- [disabled]="!fullName || !mobile || mobile.toString().length != 10 || !userName || !password || !selectedRoleId || (selectedRoleId ==2 && !selectedDistrictId) ||  (selectedRoleId ==3 && !selectedBlockId)" -->
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+  <div class="modal fade" id="successMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog modal-notify modal-error" role="document">
+          <!--Content-->
+          <div class="modal-content">
+              <!--Header-->
+              <div class="modal-header">
+                  <p class="heading lead">Success</p>
+              </div>
+
+              <!--Body-->
+              <div class="modal-body">
+                  <div class="text-center">
+                      <p> {{validationMsg}}</p>
+                  </div>
+                  <button type="button" class="btn btn-secondary m-auto d-block modal-btn" (click)="successModal()">Ok</button>
+              </div>
+          </div>
+          <!--/.Content-->
+      </div>
+  </div>
+
+  <div class="modal fade" id="oldPassNotMatch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog modal-notify modal-error" role="document">
+          <!--Content-->
+          <div class="modal-content">
+              <!--Header-->
+              <div class="modal-header data-error">
+                  <p class="heading lead">Error</p>
+              </div>
+
+              <!--Body-->
+              <div class="modal-body">
+                  <div class="text-center">
+                      <p>{{validationMsg}}</p>
+                  </div>
+                  <button type="button" class="btn btn-secondary m-auto d-block modal-btn" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+          <!--/.Content-->
+      </div>
+  </div>

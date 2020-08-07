@@ -1,0 +1,463 @@
+<ion-row>
+
+  <ion-col col-3 class="col1">
+    <div class="borders">
+      <ul padding>
+        <li *ngFor="let sectionHeader of sectionNames; let i = index" class="ksp-pointer"
+          (click)="sectionSelected(sectionHeader)">
+          <span [ngClass]="sectionHeader == sectionHeading? 'underline':'heading'">{{sectionHeader}}</span>
+        </li>
+      </ul>
+    </div>
+    <ion-row>
+      <ion-col>
+        <button [disabled]="disableStatus" ion-button block (click)="onSave('save')">Save</button>
+      </ion-col>
+      <ion-col>
+        <button [disabled]="disableStatus" ion-button block (click)="onSave('finalized')">Finalize</button>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+  <ion-col col-9 class="col2" #scrollId>
+    <div class="lastSpace">
+      <div *ngIf="selectedSection">
+        <div *ngFor="let subsectionKey of dataSharingService.getKeys(selectedSection[0]); let j = index;">
+          <ion-row>
+            <ion-col col-12 padding-left>
+              <h3
+                [ngClass]="[checkQuestionSizeBasedOnSubsectionRelevance(selectedSection[0][subsectionKey]) ? 'heading' : 'd-none']">
+                {{subsectionKey.split('@')[1] != undefined?subsectionKey.split('@')[1]:subsectionKey}}</h3>
+              <h3
+                [ngClass]="[!checkQuestionSizeBasedOnSubsectionRelevance(selectedSection[0][subsectionKey]) ? 'heading' : 'd-none']">
+                Relevant
+                questions are hidden in this section</h3>
+
+            </ion-col>
+          </ion-row>
+
+          <div *ngFor="let question of selectedSection[0][subsectionKey]; let i = index;" [ngClass]="['form-group',(question.dependecy == true)? 'leftMargin':'',(question.displayComponent == true) ? '':'d-none',
+          (question.defaultSettings && question.defaultSettings.includes('hidden')) ? 'd-none':'']">
+            <br />
+            <div [ngSwitch]="question.controlType">
+
+              <ion-row [ngClass]="question.showErrMessage?'boxErrorClass':''">
+                <ion-col col-7 padding-left>
+                  <ion-label class="ksp_item_lable" text-wrap [attr.for]="question.columnName" stacked>
+                    <strong
+                      *ngIf="question.controlType == 'heading' || question.controlType == 'beginrepeat'">{{question.label}}<strong
+                        *ngIf="question.finalizeMandatory == true" style="color:red">*</strong></strong>
+                    <span
+                      *ngIf="question.controlType != 'heading' && question.controlType != 'beginrepeat' && question.controlType != 'tableWithRowWiseArithmetic'"><span
+                        *ngIf="question.questionOrderDisplay"></span> {{question.label}}<strong
+                        *ngIf="question.finalizeMandatory == true && question.tempFinalizeMandatory !==false" style="color:red">*</strong></span>
+                    <!-- <strong *ngIf="question.finalizeMandatory == true" style="color:red">*</strong> -->
+                  </ion-label>
+                </ion-col>
+                <ion-col col-5 class="content" padding-right
+                  *ngIf="question.controlType != 'beginrepeat' && question.controlType != 'tableWithRowWiseArithmetic'">
+
+                  <ion-input *ngSwitchCase="'textbox'"
+                    [disabled]="(disableStatus || question.disabled || (question.defaultSettings && question.defaultSettings.split(',')[1] == 'disabled'))"
+                    [id]="question.columnName" [ngClass]="[question.type == 'tel' ? 'no-spinners':'']" min="0"
+                    [maxlength]="question.maxLength" [type]="question.type" [(ngModel)]="question.value"
+                    (paste)="onPaste(question)"
+                    (keyup)="checkNumber($event,question.type,question);syncGroup(question,null,$event);"
+                    (keypress)="removeColor(question.columnName);_alphabetsKeyPress(question,$event);numberInput($event,question)"
+                    (ionBlur)="checkMinMax(question,null);checkConstraints(question);"
+                    (ionChange)="checkRelevance(question);clearFeatureFilters(question);compute(question);validateBeginRepeat(question.columnName);">
+                  </ion-input>
+
+                  <!-- <div class="autocomplete" style="width: 100% !important;" *ngSwitchCase="'dropdown'" [class.disabled]="true">
+                    <ion-auto-complete #searchbar [dataProvider]="aFunc()" [id]="question.columnName"
+                    [(ngModel)]="question.value" (ionBlur)="checkMinMax(question,null)" (paste)="onPaste(question)"
+                    (keyup)="checkNumber($event,question.type,question);syncGroup(question,null,$event)" [ngClass]="[question.type == 'number' ? 'no-spinners':'']"
+                    (keypress)="_alphabetsKeyPress(question,$event);numberInput($event,question)" (keypress)="removeColor(question.columnName)" min="0"
+                    [maxlength]="question.maxLength" (ionChange)="checkRelevance(question);compute($event,question)"></ion-auto-complete>
+                  </div> -->
+
+                  <ion-item *ngSwitchCase="'autoCompleteTextView'">
+                    <ionic-selectable item-content [(ngModel)]="question.value" [isMultiple]="false"
+                      [disabled]="(disableStatus || question.disabled || question.constraints == 'disabled')"
+                      [id]="question.columnName" [items]="question.optionsOther" itemValueField="key"
+                      itemTextField="value" [canSearch]="true"
+                      (onChange)="checkRelevance(question);removeColor(question.columnName)">
+                    </ionic-selectable>
+                  </ion-item>
+
+                  <ion-item *ngSwitchCase="'autoCompleteMulti'">
+                    <ionic-selectable item-content [(ngModel)]="question.value" [isMultiple]="true"
+                      [disabled]="(disableStatus || question.disabled || question.constraints == 'disabled')"
+                      [id]="question.columnName" [items]="question.optionsOther" itemValueField="key"
+                      itemTextField="value" [canSearch]="true"
+                      (onChange)="checkRelevance(question);syncGroup(question,null,$event);removeColor(question.columnName)">
+                    </ionic-selectable>
+                  </ion-item>
+
+                  <ion-input *ngSwitchCase="'file'"
+                    (change)="onFileChange($event, question);removeColor(question.columnName)" #fileInput
+                    accept="image/*,application/pdf,application/vnd.ms-excel,application/msword,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    [id]="question.columnName" [type]="question.type" class="form-control" [ngClass]="'no-spinners'"
+                    [disabled]="(disableStatus || question.disabled)"></ion-input>
+                  <span *ngSwitchCase="'file'">(support .png .jpg .jpeg .pdf .doc .docx .xls .xlsx only)</span>
+
+                  <ion-input *ngSwitchCase="'mfile'" class="fileChooserButton" (change)="onFileChange($event, question)"
+                    #fileInput multiple
+                    accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    [id]="question.columnName" [type]="question.type" class="form-control" [ngClass]="'no-spinners'"
+                    title=" " [disabled]="(disableStatus || question.disabled)"></ion-input>
+                  <div *ngSwitchCase="'file'">
+                    <div *ngFor="let f of question.attachmentsInBase64;let fi = index">
+
+                      <div style="display: inline;">
+                        <ion-chip #chip1>
+                          <ion-label>{{f['fileName']}}</ion-label>
+                          <button ion-button clear color="danger" (click)="deleteFile(fi,question)">
+                            <ion-icon name="close-circle"></ion-icon>
+                          </button>
+                        </ion-chip>
+                      </div>
+                    </div>
+                    <ion-label style="color: brown;word-wrap: break-word !important;white-space: pre-wrap;"
+                      *ngIf="question.errorMsg!=null">{{question.errorMsg}}</ion-label>
+                  </div>
+
+                  <ion-input *ngSwitchCase="'Time Widget'" displayFormat="HH:mm" [(ngModel)]="question.value"
+                    [id]="question.columnName" (click)="open(question);removeColor(question.columnName)"
+                    (ionBlur)="checkMinMax(question,null)" readonly=true
+                    [disabled]="(disableStatus || question.disabled)">
+                  </ion-input>
+
+                  <my-date-picker *ngSwitchCase="'Date Widget'" [disabled]="(disableStatus || question.disabled)"
+                    [options]="myDatePickerOptions" [id]="question.columnName" [(ngModel)]="question.value"
+                    (dateChanged)="onDateChanged(question,null,$event);removeColor(question.columnName)">
+                  </my-date-picker>
+
+                  <!-- <ion-datetime *ngSwitchCase="'Month Widget'" [disabled]="(disableStatus || question.disabled)" displayFormat="MM-YYYY" [max]="maxDate" [(ngModel)]="question.value"
+                    (ionChange)="onMonthChanged(question)" picker-format="MM-YYYY"></ion-datetime> -->
+                  <!-- <ion-datetime *ngSwitchCase="'Month Widget'" [id]="question.columnName" [disabled]="(disableStatus || question.disabled)"
+                    displayFormat="MM-YYYY" [max]="maxDate" [(ngModel)]="question.value" (ionChange)="onMonthChanged(question);removeColor(question.columnName)"
+                    picker-format="MM-YYYY"></ion-datetime> -->
+
+                  <!-- <ion-datetime *ngSwitchCase="'Month Widget'" [disabled]="(disableStatus || question.disabled)" displayFormat="MM-YYYY" [max]="maxDate" [(ngModel)]="question.value"
+                    (ionChange)="onMonthChanged(question)" picker-format="MM-YYYY"></ion-datetime> -->
+
+                  <ion-datetime *ngSwitchCase="'Month Widget'" [id]="question.columnName"
+                    [disabled]="(disableStatus || question.disabled)" displayFormat="MM-YYYY" [min]="minDate"
+                    [max]="maxDate" [(ngModel)]="question.value"
+                    (ionChange)="onMonthChanged(question);removeColor(question.columnName)" picker-format="MM-YYYY">
+                  </ion-datetime>
+
+
+                  <!-- <mat-form-field *ngSwitchCase="'Month Widget'">
+                      <input matInput [matDatepicker]="dp" placeholder="Month and Year" [(ngModel)]="date">
+                      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                      <mat-datepicker #dp mat-mode="month" startView="multi-year" touchUi="true"
+                                      (yearSelected)="chosenYearHandler($event)"
+                                      (monthSelected)="chosenMonthHandler($event, dp)"
+                                      >
+                      </mat-datepicker>
+                    </mat-form-field> -->
+
+                    <div *ngSwitchCase="'dropdown'">
+                  <ion-select [multiple]="question.type==='checkbox'"
+                    [disabled]="(disableStatus || question.disabled || question.constraints == 'disabled')"
+                    [(ngModel)]="question.value" interface="popover" #opt2 [id]="question.columnName"
+                    (ionChange)="checkRelevance(question,'ui');syncGroup(question,null,$event);removeColor(question.columnName);">
+
+                    <ion-label>Select One</ion-label>
+                    <div *ngFor="let opt of question.options | sortItem">
+                      <ion-option class="customLabel" *ngIf="opt.visible == true" [value]="opt.key">
+                        {{opt.value}}
+                      </ion-option>
+
+                    </div>
+                  </ion-select>
+
+                </div>
+                  <ion-item *ngSwitchCase="'textarea'">
+                    <ion-textarea [id]="question.columnName" [disabled]="disableStatus" (paste)="onPaste(question)"
+                      [(ngModel)]="question.value" [maxlength]="question.maxLength"></ion-textarea>
+                  </ion-item>
+
+                  <ion-row *ngSwitchCase="'geolocation'">
+                    <ion-col col-10 class="geo-loc-text">
+                      <ion-input readonly class="geo-loc-input" [disabled]="(disableStatus || question.disabled)"
+                        [id]="question.columnName" type="text" [(ngModel)]="question.value"></ion-input>
+                    </ion-col>
+                    <ion-col col-2 class="geo-loc">
+                      <button ion-button icon-only [disabled]="(disableStatus || question.disabled)"
+                        class="geo-loc-button" (click)="getGeoLocation(question);removeColor(question.columnName)">
+                        <ion-icon name="locate"></ion-icon>
+                      </button>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row *ngSwitchCase="'camera'">
+                    <input type="file" hidden [id]="question.columnName+'file-input'"
+                      (change)="onCameraFileChange($event,question);removeColor(question.columnName)"
+                      accept="image/*;capture=camera">
+                    <ion-col col-10 class="geo-loc-img">
+                      <img [src]="question.value && question.value.src ? question.value.src:'assets/icon/uploadImage.png'"
+                        [id]="question.columnName" alt="Upload image" />
+                    </ion-col>
+                    <ion-col col-2 class="geo-loc">
+                      <button ion-button icon-only [disabled]="disableStatus ||  question.disabled"
+                        class="geo-loc-button" (click)="openCamera(question)">
+                        <ion-icon name="camera"></ion-icon>
+                      </button>
+                    </ion-col>
+                  </ion-row>
+                  <div *ngSwitchCase="'camera'">
+                      <ion-label style="color: brown;word-wrap: break-word !important;white-space: pre-wrap;"
+                      *ngIf="question.errorMsg!=null">{{question.errorMsg}}</ion-label>
+                  </div>
+                </ion-col>
+                <ion-col col-12 padding-left padding-right>
+                    <div *ngIf="question?.features?.includes('displayNoteFromExtraKey') && question.value">
+
+                    <ion-grid class="form-table">
+                        <div *ngFor="let detailKey of getKeys(getOptionByKey(question.value.key, question.optionsOther)?.extraKeyMap)">
+                            <ion-row text-wrap>
+                              <ion-col style="text-align: left">
+                                <strong>{{detailKey}}</strong>
+                              </ion-col>
+                              <ion-col style="text-align: left;">
+                                  {{getOptionByKey(question.value.key, question.optionsOther)?.extraKeyMap[detailKey].Value}}
+                              </ion-col>
+                            </ion-row>
+                          </div>
+                    </ion-grid>
+                  </div>
+                </ion-col>
+              </ion-row>
+
+              <!-- starting table section -->
+              <div *ngSwitchCase="'tableWithRowWiseArithmetic' || 'table'">
+                <ion-grid class="form-table">
+                  <div *ngFor="let rows of question.tableModel;let rowIndex = index">
+                    <ion-row *ngIf="rowIndex==0" text-wrap>
+                      <ion-col style="display: flex;align-items:center;align-content: center"
+                        *ngFor="let cell of  dataSharingService.getKeys(rows);let cellIndex = index">
+                        <ion-label text-cente no-margin no-padding>
+                          <strong>{{cell}}
+                            <strong [ngClass]="commonsEngineProvider.isString(rows[cell]) && commonsEngineProvider.checkManadatoryStatus(rows)? '' : 'd-none'"   style="color:red">*</strong>
+                            <strong [ngClass]="!commonsEngineProvider.isString(rows[cell]) && rows[cell].finalizeMandatory == true ? '' : 'd-none' " style="color:red">*</strong>
+                          </strong>
+                        </ion-label>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row text-wrap>
+                      <ion-col *ngFor="let cell of  dataSharingService.getKeys(rows);let columnIndex = index">
+                        <ion-label text-center *ngIf="columnIndex==0">
+                          <strong>{{rows[cell]}}
+                              <strong [ngClass]="commonsEngineProvider.isString(rows[cell]) && commonsEngineProvider.checkManadatoryStatus(rows) ? '' : 'd-none'"   style="color:red">*</strong>
+                            <!-- <strong *ngIf="typeof rows[cell] == 'object' && rows[cell].finalizeMandatory == true " style="color:red">*</strong> -->
+                          </strong>
+                        </ion-label>
+                        <div [ngSwitch]="rows[cell].controlType">
+                          <div *ngSwitchCase="'textbox'">
+                            <ion-input [ngClass]="!rows[cell].disabled?rows[cell].showErrMessage?'boxErrorClass':'':''"
+                              class="table-data" *ngIf="columnIndex > 0" text-center
+                              [disabled]="disableStatus || rows[cell].disabled  || question.disabled  || (rows[cell].defaultSettings && rows[cell].defaultSettings.includes('disabled'))"
+                              [id]="rows[cell].columnName" [type]="rows[cell].type"
+                              onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                              [(ngModel)]="rows[cell].value" min="0" (paste)="onPaste(rows[cell])" min="0"
+                              [maxlength]="rows[cell].maxLength"
+                              (keyup)="checkNumber($event,rows[cell].type,rows[cell]);syncGroup(rows[cell],null,$event);"
+                              (keypress)="removeColor(rows[cell].columnName);numberInput($event,rows[cell]);"
+                              (ionBlur)="checkConstraints(rows[cell])" (ionChange)="calculateTableArithmetic(cell, columnIndex,rowIndex,question.tableModel);checkRelevance(rows[cell]);
+                            compute(rows[cell]);validateBeginRepeat(rows[cell].columnName);">
+                            </ion-input>
+                          </div>
+                          <div *ngSwitchCase="'dropdown'">
+                            <ion-select [ngClass]="!rows[cell].disabled?rows[cell].showErrMessage?'boxErrorClass':'':''"
+                              [multiple]="rows[cell].type==='checkbox'"
+                              [disabled]="(disableStatus || rows[cell].disabled || rows[cell].constraints == 'disabled')"
+                              [(ngModel)]="rows[cell].value" interface="popover" #opt2 [id]="rows[cell].columnName"
+                              (ionChange)="checkRelevance(rows[cell],'ui');syncGroup(rows[cell],null,$event);removeColor(rows[cell].columnName);">
+
+                              <ion-label>Select One</ion-label>
+                              <div *ngFor="let opt of rows[cell].options | sortItem">
+                                <ion-option class="customLabel" *ngIf="opt.visible == true" [value]="opt.key">
+                                  {{opt.value}}
+                                </ion-option>
+                              </div>
+                            </ion-select>
+                          </div>
+                          <div *ngSwitchCase="'textarea'">
+                            <ion-item [ngClass]="!rows[cell].disabled?rows[cell].showErrMessage?'boxErrorClass':'':''">
+                              <ion-textarea [id]="rows[cell].columnName" [disabled]="disableStatus"
+                                (paste)="onPaste(rows[cell])" [(ngModel)]="rows[cell].value"
+                                [maxlength]="rows[cell].maxLength"></ion-textarea>
+                            </ion-item>
+                          </div>
+                        </div>
+                        <div style="font-size: 12px;margin-top:5px">
+                          <label
+                            [ngClass]="!rows[cell].disabled?rows[cell].showErrMessage?'errorMessageColor':'d-none':'d-none'">{{!rows[cell].disabled?rows[cell].cmsg
+                            != null?rows[cell].cmsg:'':''}}</label>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+                </ion-grid>
+              </div>
+              <!-- starting begin repeat section -->
+              <div *ngSwitchCase="'beginrepeat'">
+                <div *ngFor="let accordion of question.beginRepeat">
+                  <div class="border-list" padding-bottom padding-right>
+                    <div *ngFor="let bgquestion of accordion; let j =index" [ngClass]="['form-group',(bgquestion.dependecy == true) ? 'leftMargin':'',(bgquestion.displayComponent == true) ? '':'d-none',
+                      bgquestion.defaultSettings == 'hidden' ? 'd-none':'']">
+                      <div [ngSwitch]="bgquestion.controlType">
+
+                        <ion-row>
+
+                          <ion-col col-7 padding-left>
+                            <ion-label class="ksp_item_lable" text-wrap [attr.for]="bgquestion.columnName" stacked>
+                              <strong *ngIf="bgquestion.controlType == 'heading'">{{bgquestion.label}}</strong>
+                              <span *ngIf="bgquestion.controlType != 'heading'">{{bgquestion.label}}</span>
+                              <strong *ngIf="bgquestion.finalizeMandatory == true" style="color:red">*</strong>
+                            </ion-label>
+                          </ion-col>
+                          <ion-col col-5 class="content">
+
+                            <ion-input *ngSwitchCase="'textbox'"
+                              [disabled]="disableStatus || question.beginrepeatDisableStatus || bgquestion.disabled"
+                              [id]="bgquestion.columnName" [type]="bgquestion.type" [(ngModel)]="bgquestion.value"
+                              (ionBlur)="checkMinMax(bgquestion,question);checkConstraints(bgquestion)"
+                              (paste)="onPaste(bgquestion)"
+                              (keypress)="removeColor(bgquestion.columnName);_alphabetsKeyPress(bgquestion,$event);numberInput($event,bgquestion)"
+                              min="0" [maxlength]="bgquestion.maxLength"
+                              (keyup)="checkNumber($event,bgquestion.type,bgquestion);syncGroup(bgquestion,question,$event)"
+                              (ionChange)="checkRelevance(bgquestion);
+                            clearFeatureFilters(bgquestion);
+                            compute(bgquestion);validateBeginRepeat(question.columnName)
+                            ">
+
+                            </ion-input>
+
+                            <ion-input *ngSwitchCase="'file'"
+                              (change)="onFileChange($event, bgquestion);removeColor(bgquestion.columnName)" #fileInput
+                              accept="application/pdf,application/vnd.ms-excel,application/msword"
+                              [id]="bgquestion.columnName" [type]="bgquestion.type" class="form-control"
+                              [ngClass]="'no-spinners'"
+                              [disabled]="disableStatus || question.beginrepeatDisableStatus || bgquestion.disabled">
+                            </ion-input>
+                            <span *ngSwitchCase="'file'">(support .png .jpg .jpeg .pdf .doc .docx .xls .xlsx
+                              only)</span>
+
+                            <ion-input *ngSwitchCase="'mfile'" class="fileChooserButton"
+                              (change)="onFileChange($event, bgquestion)" #fileInput multiple
+                              accept="question.fileExtensions" [id]="bgquestion.columnName" [type]="bgquestion.type"
+                              class="form-control" [ngClass]="'no-spinners'" title=" "
+                              [disabled]="disableStatus || question.beginrepeatDisableStatus || bgquestion.disabled">
+                            </ion-input>
+
+                            <div *ngSwitchCase="'file'">
+                              <div *ngFor="let f of bgquestion.attachmentsInBase64;let fi = index">
+                                <div style="display: inline;">
+                                  <ion-chip #chip1>
+                                    <ion-label>{{f['fileName']}}</ion-label>
+                                    <button ion-button clear color="danger" (click)="deleteFile(fi,bgquestion)">
+                                      <ion-icon name="close-circle"></ion-icon>
+                                    </button>
+                                  </ion-chip>
+                                </div>
+                              </div>
+                              <ion-label [ngClass]="[(bgquestion.errorMsg == null ) ? 'd-none':'']"
+                                style="color: brown;word-wrap: break-word !important;white-space: pre-wrap;"
+                                *ngIf="bgquestion.errorMsg!=null">{{bgquestion.errorMsg}}</ion-label>
+                            </div>
+
+                            <ion-input *ngSwitchCase="'Time Widget'" [id]="bgquestion.columnName"
+                              [disabled]="disableStatus || question.beginrepeatDisableStatus || bgquestion.disabled"
+                              displayFormat="HH:mm" [(ngModel)]="bgquestion.value" (click)="open(bgquestion)"
+                              readonly=true></ion-input>
+
+                            <my-date-picker *ngSwitchCase="'Date Widget'" [id]="bgquestion.columnName"
+                              [disabled]="disableStatus || question.beginrepeatDisableStatus || bgquestion.disabled"
+                              [options]="myDatePickerOptions" [(ngModel)]="bgquestion.value"
+                              (dateChanged)="onDateChanged(bgquestion,question,$event);checkRelevance(bgquestion);removeColor(bgquestion.columnName)">
+                            </my-date-picker>
+
+
+                            <ion-select *ngSwitchCase="'dropdown'" [multiple]="bgquestion.type==='checkbox'"
+                              [disabled]="disableStatus  || question.beginrepeatDisableStatus || bgquestion.disabled || bgquestion.constraints == 'disabled'"
+                              [(ngModel)]="bgquestion.value" interface="popover" #opt2 [id]="bgquestion.columnName"
+                              (ionChange)="checkRelevance(bgquestion,'ui');syncGroup(bgquestion,null,$event);removeColor(bgquestion.columnName);">
+
+                              <ion-label>Select One</ion-label>
+                              <div *ngFor="let opt of bgquestion.options | sortItem">
+                                <ion-option class="customLabel" *ngIf="opt.visible == true" [value]="opt.key">
+                                  {{opt.value}}
+                                </ion-option>
+                              </div>
+                            </ion-select>
+
+                            <ion-row *ngSwitchCase="'geolocation'">
+                              <ion-col col-10 class="geo-loc-text">
+                                <ion-input readonly class="geo-loc-input"
+                                  [disabled]="(disableStatus || bgquestion.disabled)" [id]="bgquestion.columnName"
+                                  type="text" [(ngModel)]="bgquestion.value"></ion-input>
+                              </ion-col>
+                              <ion-col col-2 class="geo-loc">
+                                <button ion-button icon-only [disabled]="(disableStatus || bgquestion.disabled)"
+                                  class="geo-loc-button"
+                                  (click)="getGeoLocation(bgquestion);removeColor(bgquestion.columnName)">
+                                  <ion-icon name="locate"></ion-icon>
+                                </button>
+                              </ion-col>
+                            </ion-row>
+
+                            <ion-row *ngSwitchCase="'camera'">
+                              <ion-col col-10 class="geo-loc-img">
+                                <input type="file" hidden [id]="bgquestion.columnName+'file-input'"
+                                  (change)="onCameraFileChange($event,bgquestion);removeColor(bgquestion.columnName)"
+                                  accept="image/*;capture=camera">
+                                <img [src]="bgquestion.value && bgquestion.value.src?bgquestion.value.src:'assets/icon/uploadImage.png'"
+                                  [id]="bgquestion.columnName" alt="Pic" />
+                              </ion-col>
+
+                              <ion-col col-2 class="geo-loc">
+                                <button ion-button icon-only class="" (click)="openCamera(bgquestion);"
+                                  [disabled]="disableStatus  || question.beginrepeatDisableStatus || bgquestion.disabled">
+                                  <ion-icon name="camera"></ion-icon>
+                                </button>
+                              </ion-col>
+                            </ion-row>
+                            <ion-label style="color: brown;word-wrap: break-word !important;white-space: pre-wrap;"
+                            *ngIf="bgquestion.errorMsg!=null">{{bgquestion.errorMsg}}</ion-label>
+                          </ion-col>
+                        </ion-row>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div [ngClass]="[!question.errorFound ? 'd-none':'']" style="color: red;">{{question.errorMsg}}</div>
+              </div>
+              <div class="border-list" *ngSwitchCase="'beginrepeat'">
+                <div class="repeat-list">
+                  <ion-row class="ksp-pointer">
+                    <ion-col md-10>
+                      <span>Add another</span>
+                    </ion-col>
+                    <button style="background: transparent"
+                      [disabled]="disableStatus || question.beginrepeatDisableStatus || question.beginRepeatMinusDisable"
+                      (click)="deleteWorkerConfirmation(question.key,question)">
+                      <ion-icon right name="remove-circle"></ion-icon>
+                    </button>
+                    <button style="background: transparent"
+                      [disabled]="disableStatus || question.beginrepeatDisableStatus"
+                      (click)="addAnotherWorker(question.key)">
+                      <ion-icon right name="add-circle"></ion-icon>
+                    </button>
+                  </ion-row>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-col>
+</ion-row>

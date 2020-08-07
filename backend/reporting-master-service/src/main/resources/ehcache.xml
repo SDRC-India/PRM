@@ -1,0 +1,40 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+          
+   <diskStore path="C://PRM_Reporting/prm report cache"/>
+          
+	<cache name="dashboarddata"
+		
+		maxEntriesLocalHeap="50"
+		
+		maxEntriesLocalDisk="10000" eternal="false"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+		
+		<cache name="areadata"
+	
+	maxEntriesLocalHeap="50"
+		
+		maxEntriesLocalDisk="1000" 	eternal="false"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+			
+		<cache name="mapdata"
+	
+	maxEntriesLocalHeap="50"
+		
+		maxEntriesLocalDisk="1000" 	eternal="false"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+	
+	<cache name="districtmap"
+	maxEntriesLocalHeap="50"
+		maxEntriesLocalDisk="1000" 	eternal="false"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+</ehcache>

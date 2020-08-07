@@ -1,0 +1,75 @@
+@import "assets/styles/_color.scss";
+.parent-container {
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 60px);
+    top: 60px;
+    opacity: 0.90;
+}
+.left-filter-menus {
+    background-color: $color2;
+    padding-right: 0;
+}
+.right-filter-questions {
+    background-color: $color4;
+}
+ul.tab-menu-container {
+    margin-top: 50px;
+    padding-left: 0;
+}
+li.tab-menu {
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: #FFF;
+    cursor: pointer;
+    padding: 3px 10px;
+}
+li.tab-menu.active {
+    background-color: $color4;
+    color: #333;
+}
+.dnone{
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+section.filter-container {
+    margin-top: 35px;
+}
+.filter-submit {
+    background-color: $color1;
+    font-size: 16px;
+    padding: 3px 25px;
+    border-radius: 0;
+    color: #FFF;
+    box-shadow: 1px 1px 3px 0px #000;
+    margin-right: 15px;
+    margin-top: 25px;
+}
+.filter-submit:disabled {
+    background-color: #aaa;
+}
+li.tab-menu.filter-added:after {
+    content: '\f0b0';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: inherit;
+    margin-left: 5px;
+    color: red;
+    vertical-align: text-top;
+}
+
+@media (max-width: 767px) {
+    .parent-container {
+       z-index: 9999;
+        opacity: 1;
+        overflow: auto;
+        height: 100%;
+        top: 0;
+    }
+    .left-filter-menus{
+        padding-bottom: 20px;
+    }
+}

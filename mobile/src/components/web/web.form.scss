@@ -1,0 +1,342 @@
+web-form {
+  .customLabel{
+    font-family: 'Questrial', sans-serif;
+  }
+  .borders {
+    height: 500px !important;
+    overflow-y: auto;
+  }
+  .form-table .col {
+    padding: 5px;
+    position: relative;
+    width: 0.3pt;
+    margin: 0;
+    min-height: 1px;
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+  web-form .content {
+    padding-top: 0px;
+  }
+
+  ion-select {
+    max-width: 100% !important;
+  }
+
+  .border {
+    border: 1px solid black;
+    padding-right: 20px;
+    margin: 15px;
+  }
+
+  .border-list {
+    border: 1px solid black;
+    margin: 15px;
+  }
+
+  .repeat-list {
+    height: 40px;
+    padding-top: 5px;
+    background-color: #EDEDED;
+    color: black;
+    font-size: 16px;
+  }
+
+  ion-icon {
+    font-size: 25px; //Preferred size here
+    margin-right: 5px;
+  }
+
+  html,
+  body {
+    overflow-y: hidden;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  .col1 {
+    position: fixed;
+    left: 0;
+    top: 1;
+
+  }
+
+  .col2 {
+    position: fixed;
+    height: 99.0%;
+    margin-left: 25%;
+    margin-top: -10px;
+
+    overflow-y: scroll;
+  }
+
+  .underline {
+    text-decoration: underline;
+    // color: color($colors, lprimary, base);
+  }
+
+  .leftMargin {
+    margin-left: 20px;
+  }
+
+  .leftPadding {
+    padding-left: 20px;
+  }
+
+  .text-input-md,
+  .datetime-md,
+  .select-md {
+    border-radius: 2px;
+    border: solid thin darkgray;
+    padding: 6px;
+  }
+
+  ionic-selectable{
+    border-radius: 2px;
+    border: solid thin darkgray;
+    padding: 6px;
+    width: 100%;
+  }
+
+  .text-input-md {
+    margin: 0px 0px 0px 0px !important;
+    padding: 6px;
+    width: 100%;
+  }
+
+  body.keyboard-is-open .scroll-content {
+    margin-bottom: 0 !important;
+  }
+
+  body.keyboard-is-open .fixed-content {
+    margin-bottom: 0 !important;
+  }
+
+  .table-data {
+    margin-top: 8px;
+  }
+
+  .scroll-content {
+    overflow-y: auto;
+  }
+
+  .content {
+    padding-top: 12px;
+  }
+
+}
+
+// .heading {
+//   color: color($colors, lprimary, base);
+// }
+
+.form-table ion-col {
+  border: 1px solid #CCC;
+  text-align: center;
+}
+
+.form-table ion-col div.data-content {
+  margin-top: 25%;
+  transform: translateY(-50%);
+}
+
+.form-table ion-col div.data-content .item-md.item-block .item-inner {
+  border-bottom: none;
+}
+
+.form-table ion-col div.data-content .item-md.item-block .item-inner .input-wrapper {
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #EEE;
+}
+
+.form-table ion-input {
+  text-align: center;
+}
+
+.content-center input {
+  text-align: center;
+}
+
+textarea {
+  height: 150px;
+}
+
+// biswa
+input[type="file"] {
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+  width: 26% !important;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  z-index: 1;
+}
+
+input[type="file"]:after {
+  /* Mask the no file chosen label */
+  background-color: rgb(225, 111, 38);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  /* Style the button */
+  background: #fff;
+  background-color: rgb(225, 111, 38);
+  color: #fff;
+  font-weight: bold !important;
+  font: inherit;
+  padding: 0;
+  position: relative;
+  border: none;
+  text-align: left;
+  position: relative;
+  z-index: 100;
+  outline: 0;
+}
+
+// biswa
+
+
+
+
+.segment-md .segment-button.activated,
+.segment-md .segment-button.segment-activated {
+  background: #A82315;
+  color: white;
+}
+
+.segment-button {
+  outline: 1px red solid;
+}
+
+.ion-segment {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ion-segment-button {
+  outline: 1px #A82315 solid;
+}
+
+.errorMessageColor {
+  color: red
+}
+
+.boxErrorClass {
+  background-color: #f2dede;
+  // -webkit-transition: all 0.6s ease-out;
+  transition: all 0.8s ease-out;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  // text-align: center;
+}
+
+.lastSpace {
+  margin-bottom: 60px !important
+}
+.example-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+  display: none;
+}
+
+.alert-message {
+  overflow-y: auto;
+}
+
+// [disabled] {
+//   opacity: 0.8 !important;
+//   background-color: #d3cfcf !important;
+//   color: black !important;
+//   padding: 5px;
+// }
+.text-input[disabled]{
+  opacity: 0.8 !important;
+  background-color: #d3cfcf !important;
+  color: black !important;
+}
+
+.select-disabled{
+  opacity: 0.8 !important;
+  background-color: #d3cfcf !important;
+  color: black !important;
+}
+.select-disabled{
+  .select-icon {
+    .select-icon-inner {
+      opacity: 0.3 !important;
+      background-color: #d3cfcf !important;
+      color: black !important;
+    }
+  }
+}
+.datetime-disabled {
+  margin-top: 10px;
+  opacity: 0.8 !important;
+  background-color: #d3cfcf !important;
+  color: black !important;
+}
+.ionic-selectable {
+  max-width: 100% !important;
+}
+.ionic-selectable:not(.ionic-selectable-is-enabled) {
+  opacity: 0.8 !important;
+  background-color: #d3cfcf !important;
+  color: black !important;
+}
+// .ionic-selectable-item-is-disabled{
+//   opacity: 0.8 !important;
+//   background-color: #d3cfcf !important;
+//   color: black !important;
+// }
+.alert-md .alert-checkbox-label {
+  -webkit-box-flex: 1;
+  text-overflow: ellipsis;
+  white-space: normal;
+  color: initial;
+  overflow: hidden;
+  flex: 1 1 0%;
+  padding: 13px 26px;
+}
+.item:not(.item-label-stacked):not(.item-label-floating) .ionic-selectable-md .ionic-selectable-value {
+  padding-left: 1px !important;
+}
+input[type="file"]{
+    cursor: pointer;
+}
+.text-input[disabled]{
+  opacity: 0.8 !important;
+  background-color: #d0d0d07a !important;
+  color: black !important;
+}
+.select-disabled .select-icon-inner{
+  display: none !important
+}
+.select-disabled{
+  background-color:  #d0d0d07a !important;
+  color: black !important;
+}

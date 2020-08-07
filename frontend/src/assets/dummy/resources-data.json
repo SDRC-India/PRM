@@ -1,0 +1,98 @@
+{
+    "Guidelines and Tools": [
+        {
+            "id": "5db9961a6b530523e88a7f33",
+            "resourcesId": 49,
+            "title": "COVID-19 - Dos and Don'ts for Volunteers",
+            "description": "Do's and Don'ts for volunteers engaged in COVID-19 response in Odisha for Healthcare and non-Healthcare related services",
+            "filepathCaptionModel": [
+                {
+                    "filepath": "COVID-19 - Do's and Don'ts for Volunteers.pdf",
+                    "caption": null,
+                    "path": null
+                }
+            ],
+            "videoLink": null,
+            "resourceType": "Guidelines and Tools",
+            "resourceTypeId": "5dac52c45670862c1c49b0f5",
+            "tag": [],
+            "submittedBy": "admin",
+            "createdDate": 1572443674060,
+            "updatedDate": 1572443674060,
+            "isActive": true,
+            "isApprove": true,
+            "firstName": null
+        },
+        {
+            "id": "5db994e86b530523e88a7f2e",
+            "resourcesId": 44,
+            "title": " Guidelines for Donation and Institutions/Organizations",
+            "description": "Guidelines for Institutions / Organizations for providing voluntary contribution for COVID19 response and voluntary financial donation.",
+            "filepathCaptionModel": [
+                {
+                    "filepath": "COVID-19 - Guidelines for Donation and InstitutionsOrganization.pdf",
+                    "caption": null,
+                    "path": null
+                }
+            ],
+            "videoLink": null,
+            "resourceType": "Guidelines and Tools",
+            "resourceTypeId": "5dac52c45670862c1c49b0f5",
+            "tag": [],
+            "submittedBy": "admin",
+            "createdDate": 1572443368944,
+            "updatedDate": 1572443368944,
+            "isActive": true,
+            "isApprove": true,
+            "firstName": null
+        },
+        {
+            "id": "5db9950f6b530523e88a7f2f",
+            "resourcesId": 45,
+            "title": "Ethical Guidelines for Volunteers",
+            "description": "Ethical guidelines for volunteers regarding personal hygiene, behavioral guidelines, precautions for supporting persons on self-isolation and social media guidelines.",
+            "filepathCaptionModel": [
+                {
+                    "filepath": "COVID-19 - Ethical Guidelines for Volunteers.pdf",
+                    "caption": null,
+                    "path": null
+                }
+            ],
+            "videoLink": null,
+            "resourceType": "Guidelines and Tools",
+            "resourceTypeId": "5dac52c45670862c1c49b0f5",
+            "tag": [],
+            "submittedBy": "admin",
+            "createdDate": 1572443407371,
+            "updatedDate": 1572443407371,
+            "isActive": true,
+            "isApprove": true,
+            "firstName": null
+        }
+    ],
+    "Documents": [
+        {
+            "id": "5db9953f6b530523e88a7f30",
+            "resourcesId": 46,
+            "title": "Description of Volunteering Opportunities",
+            "description": "Brief description for volunteers on the type of volunteering opportunities including spreading public awareness & information, on-field support, delivery of essential services and relief camp management.",
+            "filepathCaptionModel": [
+                {
+                    "filepath": "COVID-19 - Description of Volunteering Opportunities.pdf",
+                    "caption": null,
+                    "path": null
+                }
+            ],
+            "videoLink": null,
+            "resourceType": "Documents",
+            "resourceTypeId": "5dac52c45670862c1c49b0f6",
+            "tag": [],
+            "submittedBy": "admin",
+            "createdDate": 1572443455229,
+            "updatedDate": 1572443455229,
+            "isActive": true,
+            "isApprove": true,
+            "firstName": null
+        }
+    ]
+}

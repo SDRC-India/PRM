@@ -1,0 +1,86 @@
+<ion-header color="primary">
+  <ion-navbar class="show-back-button" color="primary">
+    <ion-title>
+      {{formTitle}}
+    </ion-title>
+
+  </ion-navbar>
+  <ion-segment color="primary" [(ngModel)]="segment" (ionChange)="segmentChange()">
+    <!-- <ion-segment-button value="save" [disabled]="saveCount == 0">
+      <button id="notification-button" ion-button clear>
+        <ion-icon name="clipboard" class="saved">
+          <ion-badge id="notifications-badge"></ion-badge>
+        </ion-icon>
+        <span class="count">({{saveCount}})</span>
+      </button>
+    </ion-segment-button>
+    <ion-segment-button value="rejected" [disabled]="rejectedCount == 0">
+      <button id="notification-button" ion-button clear>
+        <ion-icon name="close-circle" class="reject">
+          <ion-badge id="notifications-badge"></ion-badge>
+        </ion-icon>
+        <span class="count">({{rejectedCount}})</span>
+      </button>
+    </ion-segment-button> -->
+    <ion-segment-button value="finalized" [disabled]="finalizedCount == 0">
+      <div>
+        <button id="notification-button" ion-button clear>
+          <ion-icon name="archive" class="finalized">
+            <ion-badge *ngIf="pendingForSyncCount > 0" id="notifications-badge">{{pendingForSyncCount}}
+            </ion-badge>
+          </ion-icon>
+          <span class="count">({{finalizedCount}})</span>
+        </button>
+      </div>
+    </ion-segment-button>
+    <ion-segment-button value="sent" [disabled]="sentCount == 0">
+      <button id="notification-button" ion-button clear>
+        <ion-icon name="send" class="sent">
+          <ion-badge id="notifications-badge"></ion-badge>
+        </ion-icon>
+        <span class="count">({{sentCount}})</span>
+      </button>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar *ngIf="submissions && submissions.length && (submissions|formSearch:'':segment).length"
+    placeholder="{{searchBy}}" [(ngModel)]="searchTerm"></ion-searchbar>
+  <!-- <div *ngIf="(submissions|formSearch:searchTerm:segment).length!=0 && this.deadlineDateVisibleStatus"
+    style="display: inline !important;">
+    <p style="color:red;margin-top: 10px; margin-left: 20px;margin-bottom: -8px;display: flex;"><img width="20"
+        height="20" src="assets/imgs/alert.png"> <span style="margin-left: 10px">Checklist due for submission by
+        "{{dateLineDate}}"</span></p>
+  </div> -->
+  <ion-grid>
+    <ion-list>
+      <ion-card style="box-shadow: 0px 3px 10px grey;"
+        *ngFor="let submission of (submissions|formSearch:searchTerm:segment)" (press)="deleteSubmission(submission)"
+        (click)="showExistingSubmission(submission)">
+        <ion-row [ngClass]="submission.formStatus == 'rejected'?'rowTopRed':'rowTopBlue'">
+          <ion-col col-11 text-wrap>
+            <ion-item class="rowColor">
+              <p style="background-color: whitesmoke !important;color:black !important;margin-bottom: -10px !important;" [ngClass]="[submission.pendingForSyncRecord == true ? 'detailsRed':'details']"
+                *ngFor="let headerKey of getKeys(submission.formDataHead)">{{headerKey.split("_")[1]}} -
+                {{submission.formDataHead[(headerKey)]}}</p>
+                <!-- <p style="background-color: whitesmoke !important;color:black !important;">{{submission.uniqueId}}</p> -->
+            </ion-item>
+          </ion-col>
+          <ion-col col-1 text-wrap style="display: flex;align-items: center" class="rowColor">
+            <button ion-button clear item-right icon-only>
+              <ion-icon name="ios-arrow-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-list>
+  </ion-grid>
+
+  <ion-fab bottom right padding>
+    <button ion-fab (click)="openNewBlankForm()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <h4 class="noRecords" *ngIf="(submissions|formSearch:searchTerm:segment).length==0">No record found</h4>
+</ion-content>

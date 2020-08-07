@@ -1,0 +1,184 @@
+.header-fixed { 
+    position: absolute; 
+    display:none;
+    z-index: 1;
+    overflow: hidden;
+    margin-right: 15px;
+    // width: auto;
+}
+.parent-tabl-container{
+    position: relative;
+}
+.table{
+    margin-bottom: 0px;
+}
+.table th {
+    padding: 9px;   
+}
+.table td {
+    // padding: 4px;   
+    vertical-align: middle;
+}
+table thead{
+    background-color: #333333;
+    color: #FFF;
+    font-size: 15px !important;
+}
+table{
+    font-size: 13px;
+}
+td{
+    text-align: center;
+}
+table thead th{
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 500;
+}
+.pagination-view{
+    float:right;
+}
+#myInput {
+    width: 100%;
+    border-radius: 0;
+    font-size: 16px; 
+    padding: 12px 20px 12px 30px;
+    font-style: inherit;
+    border: 1px solid #ddd;
+    // margin-bottom: 12px;
+    box-shadow: 0px 0px 2px 0px;
+    font-size: 15px;
+    height: 34px;
+}
+.form-group{
+    margin-bottom: 0px !important; 
+}
+.table-btn.search .form-group{
+    position: relative;
+}
+.table-btn.search .form-group:before {
+    position: absolute;
+    font-family: 'FontAwesome';
+    top: 5px;
+    left: 7px;
+    color: #9c9c9c;
+    content: "\f002";
+}
+.search-area {   
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 27px;
+    color: #777;
+}
+input[type="text"]{
+    font-style:italic;
+}
+.table-btn .btn-excel, .table-btn .btn-pdf{
+    // margin-bottom: 10px;
+    background-color: #33617d;
+    color: #FFF;
+    border-radius: 0;
+}
+.table-btn .btn-excel span, .table-btn .btn-pdf span{
+    font-size: 14px;
+}
+.btn-excel:focus, .btn-excel:active{
+    outline: none !important;
+    border: none !important;
+}
+.fa-sorting{
+    cursor: pointer;
+}
+.table-btn {
+    display: inline-block;
+    float: right;
+    margin: 0 5px;
+    // margin-bottom: 15px;
+}
+.td-minWidth{
+    width: 150px !important;
+}
+.td-minWidth span i{
+    cursor: pointer;
+    color: #222;
+    font-size: 18px;
+}
+.td-minWidth button{
+    border: none;
+    background: none;
+}
+.activeSubmission{
+    background: bisque !important;
+}
+.reSubmission{
+    background: #add1e8   !important;
+}
+.fa-stack {  
+    /* width: 2em; */   
+    margin-right: 10px;
+}
+.fa-stack :disabled i{
+    cursor: no-drop !important;
+    color: #bbb !important;
+}
+.search-close{
+    margin-top: -28px;
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
+    color: #999;
+}
+// .page-link{
+//     color: #333;
+// }
+// .page-item :disabled{
+//     color: #999;
+// }
+// .page-item .active{
+//     background: #333;
+//     color: #fff;
+// }
+
+.legends ul{
+    list-style-type: none;
+    display: inline-flex;  
+}
+.legends ul li {
+    padding: 10px 10px 0px 0;
+    display: inline-flex;
+}
+.legends .legnedblock {
+    height: 18px;
+    width: 18px;
+}
+.legends .legend_key {
+    padding-left: 5px;
+    padding-right: 10px;
+    font-size: 13px;
+}
+
+/** media query starts here **/
+@media(max-width: 991px){    
+    .legends{
+        margin-left: 150px;
+    }
+    .table-btn.search{
+        width: 165px;
+    }
+}
+@media(max-width: 767px){    
+    .table-btn.search{
+        width: 200px;
+    }
+    .legends{
+        margin-left: 0px;
+    }
+}
+@media(max-width: 480px){    
+    .table-btn.search{
+        width: 165px;
+    }
+    .legends .legend_key {
+        padding-right: 5px;
+    }
+}

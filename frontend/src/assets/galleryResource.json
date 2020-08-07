@@ -1,0 +1,18 @@
+[
+    {
+        "id": "5e8d7ba601c0ad79a580edf5",
+        "slugId": 107,
+        "name": "Image Gallery",
+        "typeId": 23,
+        "orderLevel": 1,
+        "formId": 1
+    },
+    {
+        "id": "5e8d7ba601c0ad79a580edf7",
+        "slugId": 108,
+        "name": "Video Gallery",
+        "typeId": 23,
+        "orderLevel": 2,
+        "formId": 1
+    }
+]

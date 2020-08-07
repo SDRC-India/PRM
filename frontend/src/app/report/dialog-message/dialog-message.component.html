@@ -1,0 +1,10 @@
+<h2 mat-dialog-title class="success">{{data.header}}</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="message-box">
+    {{ data.msg }}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button *ngIf="data.link == undefined" mat-button mat-dialog-close cdkFocusInitial>OK</button>
+  <button *ngIf="data.link != undefined" mat-button mat-dialog-close cdkFocusInitial routerLink="">OK</button>
+</mat-dialog-actions>

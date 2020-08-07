@@ -1,0 +1,244 @@
+<div class="container-fluid">
+  <div class="row question-row">
+    <div class="col-lg-3 left-list left-side-scroll">
+      <app-user-side-menu></app-user-side-menu>
+    </div>
+    <div class="right-content">
+      <div class="col-md-9 content-sec offset-md-3">
+        <div class="col-md-12">
+          <mat-form-field class="search-field user-mangt">
+            <input matInput [(ngModel)]="userManagementService.searchTexts" placeholder="Filter">
+          </mat-form-field>
+          <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabChanged($event)">
+            <mat-tab label="Pending ({{(userManagementService.users | tableDataFilter: 'PENDING').length}})">
+              <div class="mat-elevation-z8">
+                <table class="user-table-fetched table-striped table-bordered" *ngIf="userManagementService.users">
+                  <thead class="user-table-header">
+                    <tr>
+                      <th class="user-table-column">Select</th>
+                      <th class="user-table-column" *ngFor="let col of displayedColumnsForUsers">{{col}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of userManagementService.users | tableDataFilter: 'PENDING' | searchText : userManagementService.searchTexts | paginate: { itemsPerPage: 10, currentPage: userManagementService.p, id: 'pending' }; ">
+                      <td class="overflow-ellipsis user-table-td">
+                        <mat-checkbox [(ngModel)]="row.checked" (click)="selectUserForRejectiOrApproval(row.checked,row)"></mat-checkbox>
+                      </td>
+                      <td class="overflow-ellipsis user-table-td" *ngFor="let col of displayedColumnsForUsers"> {{row[col]}} </td>
+
+                    </tr>
+                  </tbody>
+                  <!-- end table  -->
+                </table>
+              </div>
+            </mat-tab>
+            <!-- approved users start -->
+            <mat-tab label="Approved ({{(userManagementService.users | tableDataFilter: 'APPROVED').length}})">
+              <div class="mat-elevation-z8 approve-tab">
+                <table class="user-table-fetched table-striped table-bordered" *ngIf="userManagementService.approveUsers">
+                  <thead class="user-table-header">
+                    <tr>
+                      <th class="user-table-column">Active</th>
+                      <th class="user-table-column" *ngFor="let col of displayedColumnsForUsers">{{col}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of userManagementService.users | tableDataFilter: 'APPROVED' | searchText : userManagementService.searchTexts| paginate: { itemsPerPage: 10, currentPage: userManagementService.a, id: 'accepted' }; ">
+                      <td class="overflow-ellipsis user-table-td">
+                        <mat-checkbox [(ngModel)]="row.isActive" (change)="row.isActive ? warnEnableUser(row.id): disableUser(row.id)"></mat-checkbox>
+                      </td>
+                      <td class="overflow-ellipsis user-table-td" *ngFor="let col of displayedColumnsForUsers"> {{row[col]}} </td>
+
+                    </tr>
+                  </tbody>
+                  <!-- end table  -->
+                </table>
+              </div>
+            </mat-tab>
+            <!-- end approved users -->
+
+            <!-- rejected users start -->
+            <mat-tab label="Rejected ({{(userManagementService.users | tableDataFilter: 'REJECTED').length}})">
+              <div class="mat-elevation-z8">
+                <table class="user-table-fetched table-striped table-bordered" *ngIf="userManagementService.rejectedUsers">
+                  <thead class="user-table-header">
+                    <tr>
+                      <th class="user-table-column" *ngFor="let col of displayedColumnsForUsers">{{col}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of userManagementService.users | tableDataFilter: 'REJECTED' | searchText : userManagementService.searchTexts | paginate: { itemsPerPage: 10, currentPage: userManagementService.r, id: 'rejected' }; ">
+                      <td class="overflow-ellipsis user-table-td" *ngFor="let col of displayedColumnsForUsers"> {{row[col]}} </td>
+                    </tr>
+                  </tbody>
+                  <!-- end table  -->
+                </table>
+              </div>
+
+            </mat-tab>
+            <!-- end rejected users -->
+          </mat-tab-group>
+          <pagination-controls *ngIf="userManagementService.showpPendingUsersPagination && userManagementService.pendingUsers ? userManagementService.pendingUsers.length > 10: ''"
+            class="pagination" (pageChange)="userManagementService.p = $event" id="pending"></pagination-controls>
+          <pagination-controls *ngIf="userManagementService.showpAcceptedUsersPagination && userManagementService.approveUsers ? userManagementService.approveUsers.length > 10: ''"
+            class="pagination" (pageChange)="userManagementService.a = $event" id="accepted"></pagination-controls>
+          <pagination-controls *ngIf="userManagementService.showpRejectedUsersPagination && userManagementService.rejectedUsers ? userManagementService.rejectedUsers.length > 10: ''"
+            class="pagination" (pageChange)="userManagementService.r = $event" id="rejected"></pagination-controls>
+
+          <div class="no-data" *ngIf="tabIndex == 0 && !(userManagementService.users | tableDataFilter: 'PENDING' | searchText : userManagementService.searchTexts | paginate: { itemsPerPage: 10, currentPage: userManagementService.r, id: 'pending' }).length">No Data Found.</div>
+
+          <div class="no-data" *ngIf="tabIndex == 1 && !(userManagementService.users | tableDataFilter: 'APPROVED' | searchText : userManagementService.searchTexts | paginate: { itemsPerPage: 10, currentPage: userManagementService.r, id: 'accepted' }).length">No data Found.</div>
+
+          <div class="no-data" *ngIf="tabIndex == 2 && !(userManagementService.users | tableDataFilter: 'REJECTED' | searchText : userManagementService.searchTexts | paginate: { itemsPerPage: 10, currentPage: userManagementService.r, id: 'rejected' }).length">No data Found.</div>
+          <!-- <pagination-controls *ngIf="userManagementService.showpPendingUsersPagination && userManagementService.users ? userManagementService.users.length > 8: ''"  class="pagination" (pageChange)="userManagementService.p = $event"  id="pending" ></pagination-controls>
+                      <pagination-controls *ngIf="userManagementService.showpAcceptedUsersPagination && userManagementService.approveUsers ? userManagementService.approveUsers.length > 8: ''" class="pagination" (pageChange)="userManagementService.a = $event" id="accepted" ></pagination-controls>
+                      <pagination-controls *ngIf="userManagementService.showpRejectedUsersPagination && userManagementService.rejectedUsers ? userManagementService.rejectedUsers.length > 8: ''" class="pagination" (pageChange)="userManagementService.r = $event" id="rejected" ></pagination-controls> -->
+          <div class="form-group edit-btn" *ngIf="tabIndex == 0 && (userManagementService.users | tableDataFilter: 'PENDING' | searchText : userManagementService.searchTexts | paginate: { itemsPerPage: 10, currentPage: userManagementService.r, id: 'pending' }).length">
+            <button class="approve-btn" mat-flat-button color="primary" (click)="approveUser(true)" type="button">Approve</button>
+            <button class="reject-btn" (click)="approveUser(false)" mat-flat-button color="warn" type="button">Reject</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal start -->
+<!-- success modal -->
+<div id="successModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h4>Success !</h4>
+        <p>{{userManagementService.successApprovedOrreject}}.</p>
+        <button class="btn btn-success" data-dismiss="modal" (click)="refreshData()">
+          <span>OK</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- errror modal -->
+<div id="errorModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h4>Error !</h4>
+        <p>{{userManagementService.errorMessage}}</p>
+        <button class="btn btn-success" data-dismiss="modal">
+          <span>OK</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- info modal -->
+<div id="infoModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h5>INFO!</h5>
+        <p>Please confirm if you want to approve the selected user(s)</p>
+        <div class="warnbody" *ngFor="let users of userManagementService.selectedUserModelList">
+          <div class="col-md-12" style="margin-left: 120px;">
+            <ul class="selected-users">
+              <li style="text-align: left;">{{users.Name}} </li>
+            </ul>
+          </div>
+        </div>
+        <button class="btn btn-success" (click)="approveSelected(userManagementService.aprroveVariable)">
+          <span>OK</span>
+        </button>
+        <button class="btn btn-success" data-dismiss="modal">
+          <span>Cancel</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- info modal -->
+<div id="enableUserModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h5>INFO!</h5>
+        <p>Are you sure to enable this user</p>
+        <button class="btn btn-success" (click)="enableUser()">
+          <span>OK</span>
+        </button>
+        <button class="btn btn-success" data-dismiss="modal" (click)='getUsers()'>
+          <span>Cancel</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="disableUserModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h5>INFO!</h5>
+        <p>Are you sure to disable this user</p>
+        <button class="btn btn-success" (click)="disableUserDetails()">
+          <span>OK</span>
+        </button>
+        <button class="btn btn-success" data-dismiss="modal" (click)='getUsers()'>
+          <span>Cancel</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- rejection reason modal-->
+<div id="rejectionInfoMessage" class="modal fade" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h5>Rejection Reason</h5>
+        <div class="container-fluid create-user-block">
+          <form class="all-fields row" #form="ngForm" (submit)="form.valid ?approveSelected(userManagementService.aprroveVariable):''">
+            <mat-card class="mat-card-block" *ngFor="let users of userManagementService.selectedUserModelList; let i =index">
+              <div class="container-fluid">
+                <div class="col-md-12 rejection-info">
+                  <div class="selection-fields col-md-12 rejection-reason-block">
+                    <label style="font-size: 13px" for="usr">User Name
+                      <span style="color:red; font-weight:500;">*</span> :</label>
+                    <span class="user-name-for-rejection">{{users.Name}}</span>
+                  </div>
+                  <div class="selection-fields col-md-12 rejection-reason-block">
+                    <label style="font-size: 13px" for="usr">Rejection Reason
+                      <span style="color:red; font-weight:500;">*</span> :</label>
+                    <mat-form-field class="rejectionreason-modal">
+                      <textarea matInput name="users_{{i}}" [(ngModel)]="users.rejectReason" required pattern="^[a-zA-Z][a-zA-Z\s\.\./]+$" maxLength="200"
+                        (change)="reasonText(users.rejectReason)" required></textarea>
+                      <mat-error class="padding-bottom ">
+                        {{form.controls['users_' + i.toString()]?.errors?.pattern ? 'Only characters, dot(.) and space can be accepted':'Please give
+                        reason for rejection'}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12 characters-left-block">
+                    <span>
+                      <b>{{users.rejectReason?200-users.rejectReason.length: ''}}</b>&nbsp;characters left</span>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+            <div class="col-md-12">
+              <button class="btn btn-success" style="margin-right: 10px;" [disabled]="!form.valid">
+                <span>Submit</span>
+              </button>
+              <button class="btn btn-success" data-dismiss="modal" (click)="form.reset()">
+                <span>Cancel</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

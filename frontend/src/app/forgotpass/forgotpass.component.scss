@@ -1,0 +1,72 @@
+
+.control-label{
+    text-align: right;
+  }
+button.verify{
+    padding: 2px;
+    min-width: 85px;
+    font-size: 12px;
+    margin: 0 5px;
+}
+
+.otp-holder{
+    display: inline-flex;
+    padding-bottom: 10px;
+    padding-right: 40px;
+}
+.change-pass-content {
+    padding-top: 50px;
+    margin-left: 12%;
+}
+.user-heading {
+    font-size: 22px;
+    text-align: center;
+    color: #444;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+    margin-bottom: 30px;
+}
+.all-fields {
+  margin-bottom: 50px;
+}
+.input-holder {
+  display: inline-block;
+  padding-bottom: 10px;
+  padding-right: 40px;
+}
+
+
+  
+@media(max-width: 767px){
+    .control-label{
+      max-width: none !important;
+    }
+    .valid-err{
+      margin-left: 0px;
+    }
+    .change-pass-content{      
+      margin-left: 6%;
+    }
+  .input-holder{
+    padding-right: 0px;
+    }
+}
+@media(max-width: 1024px){
+    .control-label{
+      max-width: 30.666667%;
+    }
+}
+@media(max-width: 360px){
+    @-moz-document url-prefix() {
+     .errorOk{     
+        margin-right: 2px;
+        font-size: 10px;
+        padding: 0px;    
+     }
+    }
+  }
+@media(max-width: 565px) and (max-height: 360px){
+    .input-holder{
+        padding-right: 15px;
+    }  
+}

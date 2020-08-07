@@ -1,0 +1,24 @@
+$text-color: #333;
+
+/* Primitive Colors */
+$primary-color:#1CABE2;
+$primary:#1CABE2;
+$first-color: #76cced;
+$first-shadow-color: #29af8a;
+$second-color: #FEFEFE;
+$third-color:  #0d6e3e;
+$fourth-color: #efefef;
+$fifth-color: #555555;
+$sixth-color: #AAAAAA;
+
+/* Derived Colors */
+$button-bg: $primary;
+$table-header-bg: $fifth-color;
+$inactive-item-bg : $sixth-color;
+$inactive-item-color: $fifth-color;
+
+$color1: $primary;
+$color2: $primary;
+$color3: #D0F0C0;
+$color4: #f5feff;
+

@@ -1,0 +1,25 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+          
+   <diskStore path="C://PRM_Reporting/prm collection cache"/>
+          
+	<cache name="userwisearea"
+		
+		maxEntriesLocalHeap="50"
+		
+		maxEntriesLocalDisk="10000" eternal="false"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+		
+		<cache name="usercount"
+	
+	maxEntriesLocalHeap="50"
+		
+		maxEntriesLocalDisk="1000" 	eternal="false"
+		memoryStoreEvictionPolicy="LFU" transactionalMode="off">
+		<persistence strategy="localTempSwap" />
+	</cache>
+			
+</ehcache>

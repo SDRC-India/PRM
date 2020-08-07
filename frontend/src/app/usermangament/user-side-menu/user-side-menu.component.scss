@@ -1,0 +1,64 @@
+@import "assets/styles/_color.scss";
+li.data-head-list.active {
+    background-color: #FFF;
+    color: $text-color;
+}
+.data-head-list.active .list-span > a{
+    color: $text-color;
+}
+li.data-head-list {
+    cursor: default;
+}
+.page-details h3 {
+    font-size: 20px;
+    text-align: left;
+    color: #FFF;
+    margin-bottom: 24px;
+    padding: 0 15px;
+}
+.btn-default {
+    background-color: $first-color !important;
+}
+.btn-default[_ngcontent-c5] {   
+    color: white !important;
+}
+@media(max-width: 991px){
+    .mobile-display li {
+        padding: 12px;
+        cursor: pointer !important;
+        font-size: 18px;
+      }
+      .mobile-display li:hover {
+        color: #fff;
+        background-color: #00837F;
+    
+      }
+}
+.page-details{
+    display: flex;
+    align-items: center;
+    .navbar-toggler{
+        padding: 0!important;
+        margin-left: 15px;    
+    }
+}
+.show-md{
+    @media (min-width: 992px) {
+        display: block !important;
+    }
+
+}
+.cms-heading {
+    font-size: 20px;
+    text-align: left;
+    color: #FFF;
+    padding: 0 15px;
+}
+@media (max-width: 991px){
+    li.data-head-list {
+        height: 40px;
+    }
+}
+.data-heads {
+    margin-bottom: 0 !important;
+}

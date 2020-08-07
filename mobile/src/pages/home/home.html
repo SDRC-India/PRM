@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <!-- <ion-searchbar *ngIf="submissions && submissions.length && (submissions|formSearch:'':segment).length" placeholder="{{searchBy}}" [(ngModel)]="searchTerm" ></ion-searchbar> -->
+    <ion-title>प्रवासी राहत मित्र ऐप </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+      <!-- <ion-toolbar>
+          <ion-searchbar placeholder="Search by partner name" [(ngModel)]="searchTerm" ></ion-searchbar>
+        </ion-toolbar> -->
+    <ion-card *ngFor="let formsList of homePageModelArr|homeFormSearch:searchTerm">
+
+      <ion-card-header class="card-content-head">
+        <ion-row>
+          <ion-col col-10 text-wrap>
+            <ion-card-title class="card-content-title" text-left>
+              {{formsList?.formName}}
+            </ion-card-title>
+          </ion-col>
+          <ion-col col-1 push-lg-1 (click)="openNewBlankForm(formsList.formKeyName,'save','new')">
+            <ion-icon name="add-circle" class="add-new"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <!-- <ion-row class="row-spacing">
+          <ion-col col-5 (click)="formsList?.saveCount?form(formsList.formKeyName,'save'):''" [ngClass]="!formsList?.saveCount? 'disabled-item' : 'enabled-item'">
+            <ion-icon name='clipboard' class="saved"></ion-icon>
+            Saved
+            <ion-badge class="ion-badge" float-right>{{formsList?.saveCount}}</ion-badge>
+          </ion-col>
+
+          <ion-col col-5 push-1 (click)="formsList?.rejectCount?form(formsList.formKeyName,'rejected'):''" [ngClass]="!formsList?.rejectCount? 'disabled-item' : 'enabled-item'">
+            <ion-icon name='close-circle' class="reject"></ion-icon>
+            Rejected
+            <ion-badge class="ion-badge" float-right>{{formsList?.rejectCount}}</ion-badge>
+          </ion-col>
+        </ion-row> -->
+
+        <ion-row class="row-spacing">
+          <!-- <ion-col col-5 (click)="formsList?.finalizeCount?form(formsList.formKeyName,'finalized'):''" [ngClass]="!formsList?.finalizeCount? 'disabled-item' : 'enabled-item'">
+            <ion-icon *ngIf="(formsList?.pendingForSyncCount == 0)" name='archive' class="finalized"></ion-icon>
+            <ion-icon style="color: #F37361" *ngIf="(formsList?.pendingForSyncCount > 0)" name='alert' class="finalized"></ion-icon>
+            Finalized
+            <ion-badge style="background-color: #3b4654" *ngIf="(formsList?.pendingForSyncCount == 0)" float-right>{{formsList?.finalizeCount}}</ion-badge>
+            <ion-badge style="background-color: #F37361" *ngIf="(formsList?.pendingForSyncCount > 0)" float-right>{{formsList?.finalizeCount}}</ion-badge>
+          </ion-col> -->
+
+          <ion-col col-5 (click)="formsList?.finalizeCount?form(formsList.formKeyName,'finalized'):''" [ngClass]="!formsList?.finalizeCount? 'disabled-item' : 'enabled-item'">
+              <!-- <ion-icon name='alert' class="finalized"></ion-icon> -->
+              <ion-icon name="archive" class="finalized"></ion-icon>
+              <!-- Finalized -->
+              Submitted
+              <ion-badge class="ion-badge"  float-right>{{formsList?.finalizeCount}}</ion-badge>
+            </ion-col>
+
+          <ion-col col-5 push-1 (click)="formsList?.sentCount?form(formsList.formKeyName,'sent'):''" [ngClass]="!formsList?.sentCount? 'disabled-item' : 'enabled-item'">
+            <ion-icon name='send' class="sent"></ion-icon>
+            Sent
+            <ion-badge class="ion-badge"  float-right>{{formsList?.sentCount}}</ion-badge>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+    <!-- <h4 class="noRecords" *ngIf="formList === undefined || formList.length === 0"> No forms assigned</h4> -->
+  </ion-grid>
+</ion-content>

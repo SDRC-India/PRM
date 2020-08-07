@@ -1,0 +1,24 @@
+<div class="container">
+  <section class="table-section">
+    <div class="row">
+    <div class="col-md-12 download-container">
+      <!-- <button class="btn btn-default filter-submit query-btn"
+          type="submit" (click)="filterOpened = true"> Query Based Report</button> -->
+      <button class="btn btn-default filter-submit"
+          type="submit" (click)="downloadReport(1)"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Download Raw Data</button>
+      <!-- <button class="btn btn-default filter-submit"
+          type="submit" (click)="downloadReport(2)"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Organization Data({{reportCount?.Institutions }})</button> -->
+    </div>
+  </div>
+    <!-- <sdrc-table  *ngIf="reportData" [id]="'tab1'" [rowData]="reportData" [downloadExcel]="true" [excelName]="reportData.length ? reportData[0].area + '_' + todayDateTime: 'download'"
+                      [columnData]="reportColumnData" [sortExcludeColumn]="[]" [maxTableHeight]="'600px'"
+                      [isPaginate]="true" [itemsPerPage]="10" [headerFixed]="true"
+                      [selectDropdown]="false" [downloadPdf]="false" [siNoAvailable]="true">
+                    </sdrc-table> -->
+  </section>
+  
+</div>
+<section class="filter-modal" [@simpleFadeAnimation] *ngIf="filterOpened">
+  <img src="assets/icons/Close.png" class="close-icon" width="25px" height="25px" (click)="filterOpened=false">
+  <app-query-filters [allOptions]="allOptions"></app-query-filters>
+</section>

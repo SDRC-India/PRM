@@ -1,0 +1,23 @@
+<div class="page-details">
+    <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#navbarUserMgmt"
+    aria-controls="navbarUserMgmt" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa fa-bars" aria-hidden="true" style="padding: 2px 5px;"></i>
+  </button>
+  <div class="cms-heading">User Management</div>
+</div>
+<div class="collapse navbar-collapse show-md" id="navbarUserMgmt">
+  <ul class="data-heads">
+    <li  class="data-head-list" [ngClass]="{'active': router.url == '/create-user'}">
+        <span class="list-span">&#10095;&nbsp;<a routerLink="/create-user"> Create User</a></span>      
+    </li>
+    <li  class="data-head-list" [ngClass]="{'active': router.url == '/edit-user' || router.url == '/edit-user-details'}">
+      <span class="list-span">&#10095;&nbsp;<a routerLink="/edit-user"> Edit User</a></span>      
+  </li>
+    <li  class="data-head-list" [ngClass]="{'active': router.url == '/manage-user'}">
+        <span class="list-span">&#10095;&nbsp; <a routerLink="/manage-user"> Manage User</a></span>
+    </li>
+    <li  class="data-head-list" [ngClass]="{'active': router.url == '/change-password'}">
+      <span class="list-span">&#10095;&nbsp; <a routerLink="/change-password"> Change Password</a></span>
+  </li>
+  </ul>
+</div>

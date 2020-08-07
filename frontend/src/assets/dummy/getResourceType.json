@@ -1,0 +1,78 @@
+{
+    "Resource Type": [
+        {
+            "id": "5dac52c45670862c1c49b0f5",
+            "slugId": 1,
+            "name": "Guidelines and Tools",
+            "type": {
+                "id": "5dac52c45670862c1c49b0f4",
+                "typeName": "Resource Type",
+                "description": "Resource Type",
+                "slugId": 1,
+                "formId": null
+            },
+            "orderLevel": 0,
+            "formId": null,
+            "score": null,
+            "parentIds": null,
+            "languages": {},
+            "filterByExp": null
+        },
+        {
+            "id": "5dac52c45670862c1c49b0f6",
+            "slugId": 2,
+            "name": "Documents",
+            "type": {
+                "id": "5dac52c45670862c1c49b0f4",
+                "typeName": "Resource Type",
+                "description": "Resource Type",
+                "slugId": 1,
+                "formId": null
+            },
+            "orderLevel": 4,
+            "formId": null,
+            "score": null,
+            "parentIds": null,
+            "languages": {},
+            "filterByExp": null
+        }
+    ],
+    "Gallery Type": [
+        {
+            "id": "5dac52c45670862c1c49b0f8",
+            "slugId": 1,
+            "name": "Image Gallery",
+            "type": {
+                "id": "5dac52c45670862c1c49b0f7",
+                "typeName": "Gallery Type",
+                "description": "Gallery Type",
+                "slugId": 1,
+                "formId": null
+            },
+            "orderLevel": 0,
+            "formId": null,
+            "score": null,
+            "parentIds": null,
+            "languages": {},
+            "filterByExp": null
+        },
+        {
+            "id": "5dac52c45670862c1c49b0f9",
+            "slugId": 2,
+            "name": "Video Gallery",
+            "type": {
+                "id": "5dac52c45670862c1c49b0f7",
+                "typeName": "Gallery Type",
+                "description": "Gallery Type",
+                "slugId": 1,
+                "formId": null
+            },
+            "orderLevel": 1,
+            "formId": null,
+            "score": null,
+            "parentIds": null,
+            "languages": {},
+            "filterByExp": null
+        }
+    ]
+}

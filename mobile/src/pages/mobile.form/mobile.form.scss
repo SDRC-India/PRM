@@ -1,0 +1,383 @@
+mobile-form {
+
+  h3{
+    margin-top: 25px !important;
+    margin-bottom: -20px !important;
+  }
+  .d-none {
+    display: none;
+  }
+
+  .web-menu {
+    background-color: red
+  }
+
+  .web-question {
+    background-color: blue
+  }
+
+  .borders {
+    border: 1px solid !important;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0 0 0 40px;
+    list-style: none !important;
+    list-style-type: none;
+  }
+
+  li {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  li+li {
+    margin-top: 2em;
+  }
+
+  .subsectorSelect {
+    width: 100%;
+    background-color: color($colors, lprimary, base);
+    color: color($colors, light, base);
+    padding-left: 5px;
+  }
+
+  ion-option {
+    max-width: 100% !important;
+  }
+
+  .border {
+    border: 1px solid black;
+    padding-right: 20px;
+    margin: 15px;
+  }
+
+  .border-list {
+    border: 1px solid #dedede;
+    margin: 15px;
+  }
+
+  .repeat-list {
+    height: 40px;
+    padding-top: 5px;
+    // background-color: #EDEDED;
+    color: black;
+    font-size: 16px;
+  }
+
+  ion-select {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  ion-icon {
+    font-size: 30px; //Preferred size here
+    margin-right: 5px;
+    // color:color($colors, primary, base);;
+  }
+
+  .underline {
+    text-decoration: underline
+  }
+
+  .leftMargin {
+    margin-left: 0px;
+  }
+
+  //   ion-input {
+  //     margin-top: 5px;
+  //     margin-bottom: 5px;
+  //     border-radius: 3px !important;
+  //     padding-left: 5px;
+  //     border: 1px solid #000000;
+  //   }
+  //   ion-select {
+  //     margin-top: 5px;
+  //     margin-bottom: 5px;
+  //     border-radius: 3px !important;
+  //     padding-left: 5px !important ;
+  //     border: 1px solid #000000;
+  //   }
+  //   ion-datetime{
+  //     margin-top: 5px;
+  //     border-radius: 3px !important;
+  //     padding-left: 5px !important ;
+  //     border: 1px solid #000000;
+  //   }
+
+  // .item-md.item-block .item-inner,
+  // .item-md.item-input.input-has-focus .item-inner,
+  // .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,
+  // .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner,
+  // .list-md .item-input.input-has-focus:last-child,
+  // .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child,
+  // .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+  //     border-bottom: none;
+  //     box-shadow: none;
+  // }
+  // .list-md .item-input.input-has-focus:last-child .item-inner,
+  // .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child .item-inner,
+  // .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child .item-inner {
+  //     box-shadow: none;
+  // }
+
+
+  .geo-loc-input {
+    padding-right: 0px !important;
+  }
+
+  .geo-loc {
+    padding: 0px !important;
+  }
+
+  .button-loc {
+    height: 3.6rem !important;
+    padding: 7px !important;
+  }
+
+  .geo-loc-img {
+    padding-left: 1px !important;
+    border: 1px solid !important;
+  }
+
+  .geo-loc-img {
+    img {
+      width: 100%;
+    }
+  }
+}
+
+ion-select {
+  .select-icon {
+    .select-icon-inner {
+      color: black !important;
+    }
+  }
+}
+.alert-md .alert-wrapper {
+  border-radius: 2px;
+  // min-height: 75vh !important;
+  /* max-width: 280px; */
+  background-color: #fafafa;
+  -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+.alert-md .alert-radio-group, .alert-md .alert-checkbox-group {
+  position: relative;
+  overflow: auto;
+  max-height: 60vh !important;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
+}
+
+.bgrHeadingClass{
+  margin-bottom: -16px;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top:1rem;
+  // border: 1px solid color($colors, primary, base) !important;
+}
+.bgrHeadLabelClass {
+ // background-color: #EDEDED !important;
+//  background-color:color($colors, primary, base);
+border: 1px #1b18185e solid;
+ padding-bottom: 8px;
+ height: 40px;
+ color: black;
+ padding-top: 12px
+}
+
+headingClass{
+  // margin-bottom: -16px;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top:1rem;
+  // border: 1px solid color($colors, primary, base) !important;
+}
+.headLabelClass {
+ // background-color: #EDEDED !important;
+ border: 1px #1b18185e solid;
+    background-color: #c0c0c02b;
+ padding-bottom: 8px;
+//  height: 40px;
+ color: black;
+ padding-top: 12px
+}
+.text-input[disabled]{
+  opacity: 0.8 !important;
+  background-color: #f1f1f1 !important;
+  color: black !important;
+}
+.select-disabled .select-icon-inner{
+  display: none !important
+}
+.select-disabled{
+  background-color: #f1f1f1 !important;
+  color: black !important;
+}
+
+.disabledItemClass {
+  background-color: #e2e2e27a !important;
+  // -webkit-transition: all 0.8s ease-out;
+  // transition: all 0.8s ease-out;
+  border-color: #000;
+}
+// calender
+// .picker-toolbar,
+//  .picker-md .picker-wrapper,
+//  .picker-md .picker-toolbar
+//   {
+//   //background: map-get($colors,primary-dark);
+//   background: url(../assets/images/background2.png);
+//   background-size: cover !important;
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-attachment: fixed;
+// }
+// .picker-md .picker-prefix,
+// .picker-md .picker-suffix,
+// .picker-md .picker-opt.picker-opt-selected {
+//   color: #fff;
+//   font-family: Montserrat-Medium;
+// }
+// .picker-md .picker-opt {
+//     color: map-get($colors,grisclair);
+//     font-family: Montserrat-Light;
+// }
+
+// .picker-md .picker-button,
+// .picker-md .picker-button.activated {
+//   color: #fff;
+//   font-family: Montserrat-Regular;
+// }
+[type="date"] {
+  background: transparent url(../assets/imgs/calendar_3.webp)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+.disabledItemClass [type="date"] {
+  background: none;
+}
+/* custom styles */
+
+// input {
+//   border: 1px solid #c4c4c4;
+//   border-radius: 5px;
+//   background-color: #fff;
+//   padding: 3px 5px;
+//   box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+//   width: 190px;
+// }
+
+.item-label-stacked .text-input-md, .item-label-floating .text-input-md {
+  margin-left: 0;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 100% !important;
+}
+.input-cover{
+  display:none !important;
+}
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-header[_ngcontent-c0] {
+  background-color: #A82315 !important;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-footer[_ngcontent-c0] button[_ngcontent-c0] {
+  justify-content: space-around !important;
+  background: #A82315 !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  height: 20px !important;
+  width: 60px !important;
+  margin-left: 36px !important;
+  box-shadow: 0px 0px 10px grey !important;
+  position: relative !important;
+}
+// #time-picker-wrapper.active[_ngcontent-c0] {
+//   background: #edeef0 !important;
+// }
+#time-picker-wrapper[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-footer[_ngcontent-c0] {
+  padding-left: 30px !important;
+  text-align: left !important;
+}
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-footer[_ngcontent-c0] {
+  border-top: none !important;
+}
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-clock[_ngcontent-c0] {
+  background: black !important;
+}
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-clock[_ngcontent-c0] > button.active[_ngcontent-c0] {
+  background: #A82315 !important;
+  color: #fff !important;
+}
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-clock[_ngcontent-c0] > button[_ngcontent-c0] {
+  color: #fff !important;;
+}
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] {
+  background: #edeef0 !important;
+}
+#time-picker-wrapper.material-red[_ngcontent-c0] #time-picker[_ngcontent-c0] .time-picker-clock[_ngcontent-c0] {
+  background: black !important;
+  box-shadow: 0px 0px 18px black !important;
+
+}
+.datepicker-date-display {
+  background-color: #607d8b
+}
+
+.datepicker-day-button:focus {
+  color: white !important;
+  background-color: #a2b0b6
+}
+
+.datepicker-done,
+.datepicker-cancel,
+.select-dropdown li>span,
+.is-today {
+  color: #607d8b !important
+}
+
+td.is-selected,
+.month-prev:active,
+.month-prev:focus,
+.month-next:active,
+.month-next:focus {
+  background-color: #607d8b !important
+}
+
+td.is-selected.is-today {
+  color: white !important
+}
+.datepicker-date-display {
+  background: red;
+}
+.datepicker-calendar-container {
+  color: blue;
+}
+.is-today {
+  color: orange !important;
+
+}
+.datepicker-table td.is-selected {
+  background: gray !important;
+}
+.datepicker-cancel, .datepicker-done {
+  color: silver;
+}
+.ionic-selectable:not(.ionic-selectable-is-enabled) .ionic-selectable-icon{
+  display: none !important
+}
+.ionic-selectable:not(.ionic-selectable-is-enabled){
+  background-color: #f1f1f1 !important;
+  color: black !important;
+}
+
+// spnineer

@@ -1,0 +1,304 @@
+{
+    "dataCollection": {
+		"IND0210101": {
+			"sbmAreaId": 351,
+			"areaCode": "IND0210101",
+			"areaName": "Angul",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210103": {
+			"sbmAreaId": 355,
+			"areaCode": "IND0210103",
+			"areaName": "Balangir",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210211": {
+			"sbmAreaId": 352,
+			"areaCode": "IND0210211",
+			"areaName": "Baleswar",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210102": {
+			"sbmAreaId": 353,
+			"areaCode": "IND0210102",
+			"areaName": "Bargarh",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210212": {
+			"sbmAreaId": 354,
+			"areaCode": "IND0210212",
+			"areaName": "Bhadrak",
+			"value": 3,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "firstslices",
+			"areaLevelId": 3
+		},
+		"IND0210321": {
+			"sbmAreaId": 356,
+			"areaCode": "IND0210321",
+			"areaName": "Boudh",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210213": {
+			"sbmAreaId": 357,
+			"areaCode": "IND0210213",
+			"areaName": "Cuttack",
+			"value": 1,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "firstslices",
+			"areaLevelId": 3
+		},
+		"IND0210104": {
+			"sbmAreaId": 358,
+			"areaCode": "IND0210104",
+			"areaName": "Debagarh",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210105": {
+			"sbmAreaId": 359,
+			"areaCode": "IND0210105",
+			"areaName": "Dhenkanal",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210322": {
+			"sbmAreaId": 360,
+			"areaCode": "IND0210322",
+			"areaName": "Gajapati",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210323": {
+			"sbmAreaId": 361,
+			"areaCode": "IND0210323",
+			"areaName": "Ganjam",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210214": {
+			"sbmAreaId": 362,
+			"areaCode": "IND0210214",
+			"areaName": "Jagatsinghapur",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210215": {
+			"sbmAreaId": 363,
+			"areaCode": "IND0210215",
+			"areaName": "Jajpur",
+			"value": 1,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "firstslices",
+			"areaLevelId": 3
+		},
+		"IND0210106": {
+			"sbmAreaId": 364,
+			"areaCode": "IND0210106",
+			"areaName": "Jharsuguda",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210324": {
+			"sbmAreaId": 365,
+			"areaCode": "IND0210324",
+			"areaName": "Kalahandi",
+			"value": 1,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "firstslices",
+			"areaLevelId": 3
+		},
+		"IND0210325": {
+			"sbmAreaId": 366,
+			"areaCode": "IND0210325",
+			"areaName": "Kandhamal",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210216": {
+			"sbmAreaId": 367,
+			"areaCode": "IND0210216",
+			"areaName": "Kendrapara",
+			"value": 1,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "firstslices",
+			"areaLevelId": 3
+		},
+		"IND0210107": {
+			"sbmAreaId": 368,
+			"areaCode": "IND0210107",
+			"areaName": "Kendujhar",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210217": {
+			"sbmAreaId": 369,
+			"areaCode": "IND0210217",
+			"areaName": "Khordha",
+			"value": 34,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "firstslices",
+			"areaLevelId": 3
+		},
+		"IND0210326": {
+			"sbmAreaId": 370,
+			"areaCode": "IND0210326",
+			"areaName": "Koraput",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210327": {
+			"sbmAreaId": 371,
+			"areaCode": "IND0210327",
+			"areaName": "Malkangiri",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210218": {
+			"sbmAreaId": 372,
+			"areaCode": "IND0210218",
+			"areaName": "Mayurbhanj",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210328": {
+			"sbmAreaId": 374,
+			"areaCode": "IND0210328",
+			"areaName": "Nabarangapur",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210219": {
+			"sbmAreaId": 375,
+			"areaCode": "IND0210219",
+			"areaName": "Nayagarh",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210329": {
+			"sbmAreaId": 373,
+			"areaCode": "IND0210329",
+			"areaName": "Nuapada",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210220": {
+			"sbmAreaId": 376,
+			"areaCode": "IND0210220",
+			"areaName": "Puri",
+			"value": 1,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "firstslices",
+			"areaLevelId": 3
+		},
+		"IND0210330": {
+			"sbmAreaId": 377,
+			"areaCode": "IND0210330",
+			"areaName": "Rayagada",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210108": {
+			"sbmAreaId": 378,
+			"areaCode": "IND0210108",
+			"areaName": "Sambalpur",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210109": {
+			"sbmAreaId": 379,
+			"areaCode": "IND0210109",
+			"areaName": "Sonepur",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		},
+		"IND0210110": {
+			"sbmAreaId": 380,
+			"areaCode": "IND0210110",
+			"areaName": "Sundargarh",
+			"value": 0,
+			"dashboardDataValue": null,
+			"number": null,
+			"cssClass": "zeroslices",
+			"areaLevelId": 3
+		}
+		}
+}

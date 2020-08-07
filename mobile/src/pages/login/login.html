@@ -1,0 +1,63 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-row>
+      <ion-col col-10 style="display: flex;align-items: center;">
+        <ion-title style="float:left;">प्रवासी राहत मित्र ऐप
+        </ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content [ngClass]="{'login_content' : isWeb}" style="display: flex;flex-direction: row;">
+  <div class="login_margin">
+      <div class="mainCenterDiv">
+      <div class="leftcenterDiv">
+        <ion-img width="160px" height="160px" style="background-color: transparent;" src="assets/imgs/login.png"></ion-img>
+    </div>
+<div class="rightcenterDiv">
+  <div>
+    <ion-list [ngClass]="{'login_item_margin' : isWeb}">
+        <ion-item no-lines  >
+        <ion-label stacked>Username</ion-label>
+        <ion-input class="loginInputs" type="text" (keyup)="keyUpCheckerUname();" (ionBlur)="checkregex();" [(ngModel)]="loginData.username" autocomplete="off"></ion-input>
+      </ion-item>
+      <ion-item no-lines >
+        <ion-label stacked>Password</ion-label>
+        <ion-input class="loginInputs" (keyup)="keyUpCheckerPwd()" type="{{type}}"  clearOnEdit="false" [(ngModel)]="loginData.password" ></ion-input>
+        <button *ngIf="!showPass" ion-button clear color="dark" type="button" item-right (click)="showPassword()" autocomplete="off">
+          <ion-icon class="icon-eye" name="md-eye-off"></ion-icon>
+        </button>
+        <button *ngIf="showPass" ion-button clear color="dark" type="button" item-right (click)="showPassword()" autocomplete="off">
+          <ion-icon class="icon-eye" name="eye"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item no-lines ></ion-item>
+
+    <div text-center class="text-link-forgotPassword">
+      <button class="login-button" type="button" ion-button (click)="login()">Login</button>
+    </div>
+    <div>
+      <ion-item no-lines>
+        <ion-label>Remember Me</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="rememberMe" class="remember-me" (ionChange)="rememberMeChanged()"></ion-checkbox>
+      </ion-item>
+    </div>
+  </ion-list>
+    <br/>
+    <br/>
+  </div>
+
+</div>
+<div class="footerCenterDiv" style="justify-content: flex-end;border-top-left-radius: 100%;border-top-right-radius:0px;border-bottom-left-radius: 4px;border-bottom-right-radius:4px">
+  <div  style="display:flex;justify-content:center; vertical-align: middle;background-color: transparent;" style="min-height:98px !important;display: flex;
+  align-items: center;color:#fff;
+  font-weight: 600;">
+     <span>Office of Relief Commissioner,<br>Government of Uttar Pradesh</span>
+  </div>
+</div>
+</div>
+</div>
+
+</ion-content>
+

@@ -1,0 +1,102 @@
+// @import "../../color.scss";
+@import "assets/styles/_color.scss";
+.content-sec {
+  padding-top: 15px;
+}
+.waves-light, .waves-light:hover, .waves-light:focus{
+    background-color: #1f497b !important;
+}
+.user-label{
+   max-width: 18.666667% !important;
+}
+.selection-fields{
+  padding-bottom:15px;
+}
+.left-list {
+    height: 105%;
+    width: 30%;
+    background-color: $first-color !important;
+    padding-top: 100px;
+    position: absolute;
+    @media (max-width:991px) {
+      width: 100%;
+      height: fit-content;
+      padding: 10px 0;
+      position: relative !important;
+  }
+}
+.user-heading {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid #1f4a7c;
+  color: #1f4a7c;
+  margin-bottom: 20px;
+  padding-bottom: 7px;
+}
+.btn.user-submit {
+  background-color: #1CABE2;
+  border-radius: 3px;
+  color: #FFF;
+}
+#oldPassNotMatch .modal-header, #successMatch .modal-header{
+  height: 39px;
+  padding: 3px 14px;
+}
+p.heading.lead {
+  font-weight: bold;
+  color: #FFF;
+}
+.user-man-btn{
+  margin-top: 10px;
+}
+.modal-btn {
+  border-radius: 0;
+  background-color: #234a7c;
+}
+input.nospinner[type=number]::-webkit-inner-spin-button, 
+input.nospinner[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.sec-head {
+  padding: 0;
+  display: block;
+}
+.proceed-btn {
+  margin-top: 40px;
+}
+/** media query starts here **/
+@media(max-width:991px){
+  .question-row{
+    margin-top: 90px;
+  }
+  .content-sec{
+    margin: auto;
+    left: 60px;
+  }
+
+}
+@media(max-width: 767px){
+  .left-list{
+    // width: 50%;
+    // z-index: 100;
+    // padding-top: 40px;
+  }
+  .question-row{
+    margin-top: 0px;
+  }
+  .content-sec{
+    margin: auto;
+    left: 0px;
+  }
+}
+span.asterisk {
+  color: red;
+}
+label.gender {
+  color: $first-color;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}

@@ -1,0 +1,74 @@
+  <ion-split-pane [enabled]="splitEnabled">
+    <ion-menu [content]="content" id="tedMenuId" (ionOpen)="menuOpened()">
+      <ion-header color="primary">
+      </ion-header>
+
+      <ion-content class="bg-color" style="display: flex;flex-direction: row;height: 100%;">
+  <div class="leftpanelMainDiv">
+    <div class="smenu-custom1" style="height: 40%;width: 100%;display: flex;flex-flow: column;justify-content: space-around;">
+      <div style="display: flex;flex-direction: row;justify-content: space-around;">
+        <img src="assets/imgs/login.png"  width="160px" height="160px" >
+        <!-- <ion-img width="194px" height="204px" style="background-color: transparent;" src="assets/imgs/splash.png"></ion-img> -->
+
+      </div>
+      <div style="display: flex;justify-content: center;align-items: center;">
+        <span>v1.0.0</span>
+      </div>
+      <!-- <ion-title><span  style="color: #fff !important;display: grid;text-align: center;">प्रवासी राहत मित्र</span></ion-title> -->
+      <div style="width: 100%;text-align: center;color: black;">
+        <ion-item no-lines class="item-content">
+          <div style="display: grid;color: black;">
+            <span style="color: black;">Welcome</span>
+            <span >
+              {{userdata}}
+            </span>
+          </div>
+
+
+        </ion-item>
+      </div>
+
+    </div>
+    <div class="hr"></div>
+    <div style="width: 100%;
+padding-top: 20px;">
+  <ion-list style="width: 100%;background-color: transparent;border-radius: 4px;">
+    <ion-item no-lines class="item-content">
+      <p style="color:#fff !important" menuToggle (click)="updateForms()">Update Forms</p>
+      <p   style="color:#fff !important" menuToggle (click)="sync()">Sync</p>
+      <p style="color:#fff !important" menuToggle (click)="logout()">Logout</p>
+    </ion-item>
+  </ion-list>
+
+    </div>
+
+  </div>
+  <div class="footerCenterDivAppp" style="border-top-left-radius: 100%;border-top-right-radius:0px;border-right:1px solid #0000002e">
+
+
+    <div  style="vertical-align: middle;background-color: transparent;">
+       <img src="assets/imgs/undp_logo.png"  width="46px" height="90px" >
+      <!-- <ion-img width="50px" height="98px" style="background-color: transparent;" src="assets/imgs/undp_logo.png"></ion-img> -->
+
+    </div>
+  </div>
+        <div class="footerSplit">
+
+          <div class="footerColumn">
+            <div  style="display: table-cell; vertical-align: middle;background-color: transparent;">
+              Powered By<a  style="text-decoration : none; color : #fff;"
+              href="http://sdrc.co.in/" target="_blank">&nbsp;&nbsp;<span class="poweredbysdrc">SDRC</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </ion-content>
+
+    </ion-menu>
+
+    <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+    <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
+    </ion-split-pane>
+

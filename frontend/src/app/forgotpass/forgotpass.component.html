@@ -1,0 +1,124 @@
+<div class="container-fluid">
+  <div class="row question-row">
+    <div class="col-md-9 change-pass-content">
+      <div class="col-md-10 offset-md-1">
+        <h2 class="user-heading">Forgot Password</h2>
+        <div class="all-fields">
+          <div class="form-group">
+            <label for="emailid" class="control-label col-md-4">Username<span style="color: red">*</span>
+              :</label>
+            <div class="col-md-8 input-holder">
+              <input name="email" id="emailID" type="text" class="form-control" [(ngModel)]="credentials.emailid"
+                [disabled]="showSucessMesg" placeholder="Enter Username">
+            </div>
+            <div class="col-md-8 offset-md-4 valid-err">
+              <small id="emailErr" style="color: green; font-weight: 500;"
+                *ngIf="showSucessMesg">{{successMesg}}</small>
+              <small id="emailErr" style="color: red; font-weight: 500;" *ngIf="showErrMesg">{{errorMesg}}</small>
+              <small id="emailErr1" style="color:red; font-weight: 500;"></small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="otp" class="control-label col-md-4">Enter OTP<span style="color: red">*</span>
+              :</label>
+            <div class="col-md-8 otp-holder" style="padding-bottom: 0;">
+              <input name="otp" id="otp" type="password" class="form-control" placeholder="Enter OTP"
+                [(ngModel)]="credentials.otp" [disabled]="!show || showOtpSucessMesg" maxlength="4"
+                style="margin-right: 5px;">
+              <button type="button"  mat-raised-button color="primary" class="btn btn-default errorOk verify" [disabled]="!show || showOtpSucessMesg || disableVerify"
+                (click)="checkOTP(credentials.emailid, credentials.otp)">Verify OTP</button>
+              <button type="button"  mat-raised-button color="primary" class="btn btn-default errorOk verify" [disabled]="!show || showOtpSucessMesg"
+                (click)="sendRequest(credentials.emailid);">Resend-OTP</button>
+              <span> <i class="fa fa-check" style="font-size:20px; color:green; margin-top: 5px;"
+                  *ngIf="showOtpSucessMesg"></i> </span>
+              <span> <i class="fa fa-times-circle" style="font-size:20px; color:red; margin-top: 5px;"
+                  *ngIf="showOtpErrMesg"></i> </span>
+            </div>
+
+            <div class="col-md-8 offset-md-4 valid-err">
+              <small id="otpSec" style="color: green; font-weight: 500;"
+                *ngIf="showOtpSucessImg">{{otpSuccessMesg}}</small>
+              <small id="otpSec" style="color: red; font-weight: 500;" *ngIf="showOtpErrImg">{{otpErrorMesg}}</small>
+              <small id="otpSec1" style="color:red; font-weight: 500;"></small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="control-label col-md-4">New Password<span
+                style="color: red">*</span> :</label>
+            <div class="col-md-8 input-holder">
+              <input type="password" class="form-control" name="password" placeholder="Enter New Password"
+                [(ngModel)]="credentials.newPassword" (keyup)="newPassError()" [disabled]="!showFields">
+            </div>
+            <div class="col-md-8 offset-md-4 valid-err">
+              <small id="newPasserror" style="color: red; font-weight: 500;"></small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmpass" class="control-label col-md-4">Confirm Password<span
+                style="color: red">*</span> :</label>
+            <div class="col-md-8 input-holder">
+              <input type="password" class="form-control" name="confirmPassword" placeholder="Enter Confirm Password"
+                (keyup)="confirmPassError()" [(ngModel)]="credentials.confirmPassword" [disabled]="!showFields">
+            </div>
+            <div class="col-md-8 offset-md-4 valid-err">
+              <small id="confirmPasserror" style="color: red; font-weight: 500;"></small>
+              <small *ngIf="credentials.confirmPassword.length&&credentials.newPassword!=credentials.confirmPassword"
+                style="color: red; font-weight: 500;">
+                New password and Confirm password does not match.
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-5 offset-md-6 create-btn">
+              <button mat-raised-button color="primary" type="button" class="btn btn-default" *ngIf="!showFields && !showBtn"
+                (click)="sendRequest(credentials.emailid);">Send OTP</button>
+              <button mat-raised-button color="primary" type="button" class="btn btn-default" [disabled]="!showFields" *ngIf="showBtn"
+                (click)="sendAllData(credentials.emailid, credentials.otp, credentials.newPassword, credentials.confirmPassword);">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="passNotMatch" class="confrirmation-modal modal fade" role="dialog" data-backdrop="static"
+    data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body warnbody text-center">
+          <div class="infohead"> Error </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <i class="fa fa-close fa-4x animated rotateIn"></i>
+              <p>{{validationMsg}}</p>
+            </div>
+            <button type="button" class="btn btn-default errorOk" (click)="pageRefer()">Ok</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="successMatch" class="confrirmation-modal modal fade" role="dialog" data-backdrop="static"
+    data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body warnbody text-center">
+          <div class="infohead"> Success </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <i class="fa fa-check fa-4x animated rotateIn"></i>
+              <p>{{validationMsg}}</p>
+            </div>
+            <button type="button" class="btn btn-default errorOk" (click)="pageRefer()">Ok</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

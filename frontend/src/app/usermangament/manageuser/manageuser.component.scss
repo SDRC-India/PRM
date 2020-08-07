@@ -1,0 +1,179 @@
+@import "assets/styles/_color.scss";
+
+.right-content {
+    width: 100%;
+}
+.left-list {
+    height: 105%;
+    width: 30%;
+    background-color: $primary-color !important;
+    padding-top: 100px;
+    position: absolute;
+    @media (max-width:991px) {
+      width: 100%;
+      height: fit-content;
+      padding: 10px 0;
+      position: relative !important;
+  }
+}
+.content-sec {
+    padding-top: 15px;
+}
+.mat-form-field {
+    display: block;
+    z-index: 999;
+}
+.mt-btn {
+    margin-top: 25px!important;
+}
+.mat-card:not {
+    box-shadow:-1px 1px 2px 3px #cebfbf;
+}
+.mat-tab-body-content {
+    border: 1px solid rgb(221, 221, 221) !important;
+}
+.mat-tab-header {
+    margin-top: 80px !important;
+}
+.edit-btn { 
+  text-align: center;
+}
+.mat-tab-group {
+    font-family: inherit;
+}
+.fa-download { cursor: pointer;}
+button:disabled,
+button[disabled]{
+  cursor: no-drop !important;
+}
+.disabled, :disabled {
+  pointer-events: all !important;
+}
+.approve-btn {
+  margin-right: 20px;
+    border-radius: 3px;
+    border: none;
+    padding: 7px;
+    color: #FFF;
+    background: $primary-color !important;
+    width: 100px;
+    height: 40px;
+ }
+ .edit-btn {
+    margin-right: 0;
+    border-radius: 0;
+    padding: 0px 11px 0px 11px;
+    margin-top: 70px;
+ }
+ .reject-btn { 
+    border-radius: 3px;
+    padding: 7px;
+    color: #FFF;
+    background: #e86856 !important;
+    border: none;
+    width: 100px;
+    height: 40px;
+ }
+.cdk-overlay-pane {
+  height: 45% !important;
+  width: 45% !important;
+}
+.mat-tab-body-content {
+    height: auto !important;
+}
+table {
+    width: 100%;
+}
+.search-field.mat-form-field {
+    font-size: 14px;
+    width: 30%;
+    left: 70%;
+    top: 0;
+}
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+    border: none;
+    width: 280px !important;
+}
+tr.mat-header-row {
+    height: 42px;
+    background: #1f4a7c;
+}
+.mat-elevation-z8 {
+  min-width: 1998px;
+}
+th.mat-sort-header-sorted {
+    color: black;
+  }
+th.mat-header-cell {
+    color: #fff;
+}
+.user-table-header {
+  background: $primary-color;
+  color: #fff;
+}
+.search-field {
+    top: 0;
+    position: absolute;
+}
+ .user-table-column { 
+  padding: 8px;
+  text-align: center;
+  min-width: 135px;
+ }
+ .user-table-td {
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  padding: 9px;
+ }
+#disableUserModal .modal-header, #enableUser .modal-header{
+    height: 39px;
+    padding: 3px 14px;
+}
+.characters-left-block {
+    text-align: right;
+    font-size: 14px;
+    padding-right: 7px;
+}
+.user-table-fetched thead tr th:first-child {
+  max-width: 60px;
+  min-width: auto;
+}
+.mat-card-block {
+  width: 100%;
+  background-color: #ebf5f7;
+}
+.selection-fields {
+  text-align: left;
+}
+button.btn.btn-success {
+  margin: 15px 10px;
+}
+.no-data {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 24px;
+}
+
+/** Media query starts here **/
+@media(max-width: 991px){
+  .question-row{
+    margin-top: 90px;
+  }
+  .content-sec{
+    margin: auto;
+  }
+}
+@media(max-width: 767px) {
+  .search-field {
+    position: relative;
+  }
+  .question-row{
+    margin-top: 0px;
+  }
+  .mt-btn{
+    text-align: center !important;
+  }
+}
+ 

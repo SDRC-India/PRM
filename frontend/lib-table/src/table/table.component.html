@@ -1,0 +1,203 @@
+<div class="">
+  <div class="col-md-12 search-box p-0 extras-container"   >
+    <div class="text-right" [hidden]="rowData && !rowData.length">
+      <div class="table-btn search search-box-wrapper" *ngIf="searchBox">
+        <div class="form-group" >
+          <input class="form-control" type="text" id="myInput" [(ngModel)]="searchFilter" placeholder="search...">
+        </div>
+      </div>
+      <div *ngIf="downloadPdf" class="table-btn">
+        <button class="btn btn-pdf btn-submit" (click)="createPdf(pdf, 'table-fixed-container'+id)"><span><i
+              class="fa fa-file-pdf-o" style="font-size:15px;" aria-hidden="true"></i></span>&nbsp;Download
+          PDF</button>
+      </div>
+      <div *ngIf="downloadExcel" class="table-btn">
+        <button class="btn btn-excel btn-submit" (click)="tableToExcel(id)"><span><i class="fa fa-file-excel-o"
+              style="font-size:15px;" aria-hidden="true"></i></span>&nbsp;Export to Excel</button>
+      </div>
+      <div *ngIf="downloadPdfByServer" class="table-btn">
+        <button class="btn btn-pdf btn-submit" (click)="downloadPdfByServerClicked(id, rowData)"><span><i
+              class="fa fa-file-pdf-o" style="font-size:15px;" aria-hidden="true"></i></span>&nbsp;Download
+          PDF</button>
+      </div>
+      <div *ngIf="downloadExcelByServer" class="table-btn">
+        <button class="btn btn-excel btn-submit" (click)="downloadExcelByServerClicked(id, rowData)"><span><i
+              class="fa fa-file-excel-o" style="font-size:15px;" aria-hidden="true"></i></span>&nbsp;Download
+          Excel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 table-sec p-0">
+    <div class="parent-tabl-container">
+      <kendo-pdf-export #pdf paperSize="A2" margin="2cm" [repeatHeaders]="true" [scale]="0.6">
+        <div class="filled-form view-form" id="{{'table-fixed-container'+id}}" (scroll)="fixTableHeader($event)"
+          style="overflow: auto; overflow-y: hidden;">
+
+          <!-- Header fixed table section -->
+
+          <!-- <div  *ngIf="headerFixed" id="{{'header-fixed'+id}}" class=" header-fixed"> 
+                  <div id="{{id+'fixedcontainer'}}" class="fixedcontainer">
+                    <div class="th" *ngFor="let col of columnData" [ngClass]="{selected: col == columns}">{{col}} 
+                      <i *ngIf="sorting && (!sortExcludeColumn || (sortExcludeColumn && sortExcludeColumn.indexOf(col) == -1))" (click)="sort(col)" class="fa fa-caret-up fa-lg fa-sorting" [ngClass]="{
+                          'fa-sort-asc': (col == columns && !isDesc), 
+                          'fa-sort-desc': (col == columns && isDesc) }" aria-hidden="true">
+                      </i>
+                    </div>
+                  </div>
+              </div> -->
+          <table *ngIf="headerFixed" id="{{'header-fixed'+id}}" class="table table-striped table-bordered header-fixed">
+            <thead>
+              <tr *ngIf="isThreeDimension">
+                <th *ngFor="let col of threeDColumnData" [attr.colspan]="col.colspan" [attr.rowspan]="col.rowspan">
+                  {{col.value  }}
+                </th>
+              </tr>
+              <tr>
+                <!-- <th><input type="checkbox" [(ngModel)]="tableService.checkStatus" (click)="tableService.selectAllCheckBoxes(rowData, !tableService.checkStatus)">&nbsp; Select All </th> -->
+                <th *ngFor="let col of columnData ">{{col}}
+                  <i *ngIf="sorting && (!sortExcludeColumn || (sortExcludeColumn && sortExcludeColumn.indexOf(col) == -1))"
+                    (click)="sort(col)" class="fa fa-caret-up fa-lg fa-sorting" [ngClass]="{
+                              'fa-sort-asc': (col == columns && !isDesc), 
+                              'fa-sort-desc': (col == columns && isDesc) }" aria-hidden="true">
+                  </i>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="rowData">
+              <tr [ngClass]="rowDetails && rowDetails.CssClass ? rowDetails.CssClass:''"
+                *ngFor="let rowDetails of rowData | searchPipe: searchFilter | sortPipe: {property: columns, direction: direction}:isTotalAvailable | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id:id } let i = index;">
+                <!-- <td><input type="checkbox" [(ngModel)]="rowDetails.checkChanged" (change)="tableService.singleCheckBoxClicked(tableService.rowData)"></td> -->
+                <td *ngFor="let col of columnData | excludeElementPipe: excludedColumns">
+                  <div *ngIf="rowDetails && getType(rowDetails[col]) != 'object'" [ngClass]="{'bold': rowDetails.boldFont}">{{rowDetails[col]}}</div>
+                  <div *ngIf="rowDetails && getType(rowDetails[col]) == 'object'" style="display: inline-flex;">
+                    <div *ngFor="let colDetails of rowDetails[col]">
+                      <div [ngSwitch]="colDetails.controlType" class="col-md-9 input-holder">
+                        <button *ngSwitchCase="'button'" class="{{colDetails.class}}" type="{{colDetails.type}}"
+                          (click)="actionClicked(colDetails.class, rowDetails)" matTooltip="{{colDetails.tooltip}}">
+                          <i *ngIf="colDetails.icon" class="fa"
+                            [ngClass]="colDetails.icon"></i>{{colDetails.value}}</button>
+                        <a *ngSwitchCase="'link'" matTooltip="{{colDetails.tooltip}}"
+                          class="{{colDetails.class}} hyperlink" type="{{colDetails.type}}"
+                          (click)="actionClicked(colDetails.class, rowDetails)">{{colDetails.value}}</a>
+                        <input *ngSwitchCase="'textbox'" name="{{colDetails.name}}" [type]="colDetails.type"
+                          [(ngModel)]="colDetails.value" class="form-control">
+
+                        <!-- <mat-slide-toggle *ngSwitchCase="'switch'" name="{{i + 'switch'}}" class="form-control" 
+                          [checked]="checkChanged(rowDetails[colDetails.mappedKey])" (change)="actionClicked('enableDisable', rowDetails)"> -->
+                        <!-- {{rowDetails.isEnabled ? "Disable" : "Enable"}} [(ngModel)]="rowDetails['mappedKey']" colDetails.status-->
+                        <!-- </mat-slide-toggle> -->
+                        <!-- <input *ngSwitchCase="'checkbox'" name="{{colDetails.name}}" type="{{colDetails.type}}">                                    -->
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div *ngIf="rowDetails && getType(rowDetails[col]) == 'object'" style="display: inline-flex;">
+                  </div> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- main table -->
+          <table class="table table-striped table-bordered" id="{{id}}">
+            <thead>
+              <tr *ngIf="isThreeDimension">
+                <th *ngFor="let col of threeDColumnData" [attr.colspan]="col.colspan" [attr.rowspan]="col.rowspan">
+                  {{col.value}}
+                </th>
+              </tr>
+              <tr>
+                <!-- <th><input type="checkbox" [(ngModel)]="tableService.checkStatus" (click)="tableService.selectAllCheckBoxes(rowData, !tableService.checkStatus)">&nbsp; Select All </th> -->
+                <th *ngFor="let col of columnData | modifyColumns: 'columns' | excludeElementPipe: excludedColumns"
+                  class="text-capitalize">{{col | tableName}}
+                  <i *ngIf="sorting && (!sortExcludeColumn || (sortExcludeColumn && sortExcludeColumn.indexOf(col) == -1))"
+                    (click)="sort(col)" class="fa fa-caret-up fa-lg fa-sorting" [ngClass]="{
+                        'fa-sort-asc': (col == columns && !isDesc), 
+                        'fa-sort-desc': (col == columns && isDesc) }" aria-hidden="true">
+                  </i>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="rowData">
+              <tr [ngClass]="rowDetails && rowDetails.CssClass ? rowDetails.CssClass:''"
+                *ngFor="let rowDetails of rowData | modifyColumns: 'data' | searchPipe: searchFilter | sortPipe: {property: columns, direction: direction}:isTotalAvailable | paginate: { itemsPerPage: itemsPerPage, currentPage: p, id:id } let rowIndex = index;">
+                <!-- <td><input type="checkbox" [(ngModel)]="rowDetails.checkChanged" (change)="tableService.singleCheckBoxClicked(tableService.rowData)"></td> -->
+                <td *ngFor="let col of columnData | excludeElementPipe: excludedColumns" [ngClass]="{'bold': rowDetails.boldFont}">
+                  <div *ngIf="rowDetails && getType(rowDetails[col]) != 'object'">{{rowDetails[col]}}
+                  </div>
+                  <!-- column with object data -->
+                  <div *ngIf="rowDetails && rowDetails[col] && getType(rowDetails[col]) == 'object' "
+                    [ngClass]="{'d-inline-flex':rowDetails[col][0].controlType}">
+                    <div *ngFor="let colDetails of rowDetails[col]; let i= index;"
+                      [ngClass]="{'fileseys':!colDetails.controlType}">
+                      <div [ngSwitch]="colDetails.controlType" class="col-md-9 p-0 input-holder"
+                        *ngIf="colDetails.controlType ">
+
+                        <!-- BUTTON -->
+                        <button *ngSwitchCase="'button'" class="{{colDetails.class}}" type="{{colDetails.type}}"
+                          (click)="!colDetails.isActivate? actionClicked(colDetails.class, rowDetails,rowIndex):''"
+                          [disabled]="colDetails.isActivate" [ngClass]="{'disbl':colDetails.isActivate}">
+                          <i *ngIf="colDetails.icon && colDetails.tooltip !== 'Edit'" class="fa {{colDetails.icon}}"
+                            matTooltip="{{colDetails.tooltip}}"></i>
+                          <img class="image" *ngIf="colDetails.tooltip == 'Edit'" src="assets/images/icon/Edit.png"
+                            matTooltip="{{colDetails.tooltip}}" />
+                          {{colDetails.value}}
+                        </button>
+
+                        <!-- LINK -->
+                        <a *ngSwitchCase="'link'" matTooltip="{{colDetails.tooltip}}"
+                          class="{{colDetails.class}} hyperlink" type="{{colDetails.type}}"
+                          (click)="!colDetails.isActivate? actionClicked(colDetails.class, rowDetails, rowIndex):''">{{colDetails.value}}</a>
+
+                        <!-- TEXTBOX -->
+                        <input *ngSwitchCase="'textbox'" name="{{colDetails.name}}" [type]="colDetails.type"
+                          [(ngModel)]="colDetails.value" class="form-control">
+
+                        <!-- TOGGLE BUTTON -->
+                        <mat-slide-toggle *ngSwitchCase="'switch'" name="{{rowIndex + 'switch'}}" class="form-control"
+                          [color]="'#007bff'"
+                          [matTooltip]="(rowDetails[colDetails.mappedKey] == colDetails.activeValue) ? colDetails.inactiveLabel : colDetails.activeLabel"
+                          [checked]="isChecked(rowDetails,colDetails)"
+                          (change)="checkChanged('enableDisable', rowDetails, rowIndex, colDetails)">
+                        </mat-slide-toggle>
+
+                        <!-- CHECKBOX -->
+                        <!-- <input *ngSwitchCase="'checkbox'" name="{{colDetails.name}}" type="{{colDetails.type}}"
+                          (click)="checkChanged('checkbox', rowDetails, rowIndex, colDetails)"> -->
+
+                        <!-- CHECKBOX START -->
+                        <section class="example-section margin-bottom margin-mintop" *ngSwitchCase="'checkbox'">
+                          <mat-checkbox name="{{'checkbox' + '' + rowIndex}}" [(ngModel)]="rowDetails[colDetails.mappedKey]"
+                            (change)="actionClicked('checkbox', rowDetails, rowIndex, colDetails)" class="example-margin"
+                            color="primary">
+                          </mat-checkbox>
+                        </section>
+                      </div>
+                      <div *ngIf="!colDetails.controlType && colDetails.originalName">
+                        {{(colDetails?.originalName?.length>10)? (colDetails?.originalName | slice:0:9)+'..':(colDetails?.originalName)}}<span
+                          style="cursor: pointer;"><i (click)="actionClicked('openFile', rowDetails, rowIndex)"
+                            class="fa fa-eye" aria-hidden="true"></i></span>
+                      </div>
+
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </kendo-pdf-export>
+      <br />
+      <div
+        *ngIf="(rowData && !rowData.length) || (rowData && rowData.length && (rowData | searchPipe: searchFilter).length==0)"
+        class="col-md-12 text-center search-area">
+        <mat-card>
+          No Data Found.
+        </mat-card>
+      </div>
+      <div *ngIf="isPaginate && rowData && rowData.length">
+        <pagination-controls (pageChange)="p = $event;" id="{{id}}" class="pagination-view"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

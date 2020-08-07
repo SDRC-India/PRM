@@ -1,0 +1,38 @@
+<div class="container">
+  <section class="filter-section">
+    <div class="row">
+      <div class="subq col-md-3">
+        <label for="usr">Report Type :</label>
+        <mat-form-field>
+          <mat-select [(ngModel)]="selections.reportType">
+            <mat-option *ngFor="let opt of reportTypes" [value]="opt">
+              {{opt.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="subq col-md-3">
+        <label for="usr">From Date :</label>
+        <mat-form-field>
+          <input matInput readonly [matDatepicker]="picker1" name="fromDate" [min]="minDate" [max]="todayDate"
+            [(ngModel)]="selections.fromDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="subq col-md-3">
+        <label for="usr">To Date :</label>
+        <mat-form-field>
+          <input matInput readonly [matDatepicker]="picker2" name="toDate" [min]="minDate" [max]="todayDate"
+            [(ngModel)]="selections.toDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-3 mt-btn">
+        <button class="btn btn-default filter-submit" [disabled]="!selections.reportType || !selections.fromDate || !selections.toDate"
+          type="submit" (click)="downloadReport()">Submit</button>
+      </div>
+    </div>
+  </section>
+  
+</div>
